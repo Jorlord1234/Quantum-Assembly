@@ -1,18 +1,16 @@
-# Test checklist for version 0.1
+# Test checklist for version 0.3
 
-Tick each one. Tell Claude which ones fail.
+Tell Claude which ones fail.
 
 1. [ ] The game starts with the mod
-2. [ ] The creative tab "Quantum Assembly" exists
-3. [ ] Every item has a picture (no purple and black squares)
-4. [ ] Place the Quantum Assembly Kit. It looks like the picture
-5. [ ] Place the Master Chef's Cauldron. It looks like the picture
-6. [ ] Place the Starglass Ore. Mine it with an iron pickaxe. It drops Starglass
-7. [ ] The full Experience Catalyst (second one in the tab) shows a cyan bar
-8. [ ] Hover over the Catalyst. It says how much experience it has
-9. [ ] Craft the Nova Smithing Template (3 templates + a netherite ingot)
-10. [ ] Smithing table: template + Netherite Coin + Warp Stone = Uncompleted Nova Coin
-11. [ ] The Catalyst recipe is in JEI (Sequenced Assembly)
-12. [ ] Make the Catalyst: Nether Star, 2 Netherite, 1 bucket of experience, Super Experience Block, Press
-13. [ ] A Create Spout can fill an empty Catalyst with liquid experience
-14. [ ] Wear the Chef's Hat (right-click it). You get Nourishment
+2. [ ] Quantum Assembly Kit and Master Chef's Cauldron look right (textures)
+3. [ ] Chef's Hat looks like a 3D hat in hand, on the ground and on your head
+4. [ ] Starglass Ore: only a NETHERITE pickaxe drops Starglass
+5. [ ] Full Experience Catalyst on a Blaze Burner: it turns blue, catalyst loses 1 bucket
+6. [ ] Cake of Nebulae on a Blaze Burner: it turns blue
+7. [ ] Uncompleted Nova Coin thrown into the void comes back as a Nova Coin
+8. [ ] NEW: Unfinished Experience Catalyst shows a progress bar that grows after every Sequenced Assembly step
+9. [ ] NEW: With a Nova Coin in your inventory, a Waystone / Warp Stone teleport costs no XP (try it in survival, with 0 XP)
+10. [ ] NEW: Without the Nova Coin, teleports still cost XP as normal
+
+If 9 fails, send logs/latest.log and search it for "Waystones" or "Nova Coin".

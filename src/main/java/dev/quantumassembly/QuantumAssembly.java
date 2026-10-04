@@ -1,12 +1,17 @@
 package dev.quantumassembly;
 
+import com.mojang.logging.LogUtils;
+import org.slf4j.Logger;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.templates.FluidHandlerItemStack;
@@ -14,6 +19,7 @@ import net.neoforged.neoforge.fluids.capability.templates.FluidHandlerItemStack;
 @Mod(QuantumAssembly.MODID)
 public class QuantumAssembly {
     public static final String MODID = "quantum_assembly";
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public QuantumAssembly(IEventBus modEventBus, ModContainer modContainer) {
         ModBlocks.BLOCKS.register(modEventBus);
@@ -22,6 +28,8 @@ public class QuantumAssembly {
         ModTabs.TABS.register(modEventBus);
 
         modEventBus.addListener(this::registerCapabilities);
+        modEventBus.addListener((FMLCommonSetupEvent event) -> event.enqueueWork(WaystonesCompat::register));
+        NeoForge.EVENT_BUS.addListener(EventPriority.HIGH, CatalystEvents::onRightClick);
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 

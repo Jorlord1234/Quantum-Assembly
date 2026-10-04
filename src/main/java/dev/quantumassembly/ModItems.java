@@ -12,11 +12,12 @@ public class ModItems {
     public static final DeferredItem<ExperienceCatalystItem> EXPERIENCE_CATALYST = ITEMS.registerItem(
             "experience_catalyst", ExperienceCatalystItem::new, new Item.Properties().rarity(Rarity.EPIC));
 
-    public static final DeferredItem<Item> INCOMPLETE_EXPERIENCE_CATALYST = ITEMS.registerSimpleItem(
-            "incomplete_experience_catalyst", new Item.Properties().stacksTo(1));
+    public static final DeferredItem<IncompleteCatalystItem> INCOMPLETE_EXPERIENCE_CATALYST = ITEMS.registerItem(
+            "incomplete_experience_catalyst", IncompleteCatalystItem::new, new Item.Properties());
 
     public static final DeferredItem<Item> NOVA_TEMPLATE = ITEMS.registerSimpleItem("nova_template");
-    public static final DeferredItem<Item> UNCOMPLETED_NOVA_COIN = ITEMS.registerSimpleItem("uncompleted_nova_coin");
+    public static final DeferredItem<UncompletedNovaCoinItem> UNCOMPLETED_NOVA_COIN = ITEMS.registerItem(
+            "uncompleted_nova_coin", UncompletedNovaCoinItem::new, new Item.Properties());
     public static final DeferredItem<Item> NOVA_COIN = ITEMS.registerSimpleItem("nova_coin",
             new Item.Properties().rarity(Rarity.EPIC));
     public static final DeferredItem<Item> CAKE_OF_NEBULAE = ITEMS.registerSimpleItem("cake_of_nebulae",
