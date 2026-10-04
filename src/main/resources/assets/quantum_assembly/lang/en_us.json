@@ -1,0 +1,15 @@
+{
+  "itemGroup.quantum_assembly": "Quantum Assembly",
+  "item.quantum_assembly.experience_catalyst": "Experience Catalyst",
+  "item.quantum_assembly.incomplete_experience_catalyst": "Unfinished Experience Catalyst",
+  "item.quantum_assembly.nova_template": "Nova Smithing Template",
+  "item.quantum_assembly.uncompleted_nova_coin": "Uncompleted Nova Coin",
+  "item.quantum_assembly.nova_coin": "Nova Coin",
+  "item.quantum_assembly.cake_of_nebulae": "Cake of Nebulae",
+  "item.quantum_assembly.starglass": "Starglass",
+  "item.quantum_assembly.chefs_hat": "Chef's Hat",
+  "block.quantum_assembly.starglass_ore": "Starglass Ore",
+  "block.quantum_assembly.quantum_assembly_kit": "Quantum Assembly Kit",
+  "block.quantum_assembly.master_chefs_cauldron": "Master Chef's Cauldron",
+  "tooltip.quantum_assembly.experience": "Experience: %s / %s buckets"
+}

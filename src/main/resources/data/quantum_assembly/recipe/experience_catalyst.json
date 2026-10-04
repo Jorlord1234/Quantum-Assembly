@@ -1,0 +1,96 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "minecraft:nether_star"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "id": "quantum_assembly:experience_catalyst"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "quantum_assembly:incomplete_experience_catalyst"
+        },
+        {
+          "item": "minecraft:netherite_ingot"
+        }
+      ],
+      "results": [
+        {
+          "id": "quantum_assembly:incomplete_experience_catalyst"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "quantum_assembly:incomplete_experience_catalyst"
+        },
+        {
+          "item": "minecraft:netherite_ingot"
+        }
+      ],
+      "results": [
+        {
+          "id": "quantum_assembly:incomplete_experience_catalyst"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "quantum_assembly:incomplete_experience_catalyst"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 1000,
+          "fluid": "create_enchantment_industry:experience"
+        }
+      ],
+      "results": [
+        {
+          "id": "quantum_assembly:incomplete_experience_catalyst"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "quantum_assembly:incomplete_experience_catalyst"
+        },
+        {
+          "item": "create_enchantment_industry:super_experience_block"
+        }
+      ],
+      "results": [
+        {
+          "id": "quantum_assembly:incomplete_experience_catalyst"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "quantum_assembly:incomplete_experience_catalyst"
+        }
+      ],
+      "results": [
+        {
+          "id": "quantum_assembly:incomplete_experience_catalyst"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "quantum_assembly:incomplete_experience_catalyst"
+  }
+}
