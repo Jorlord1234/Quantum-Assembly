@@ -85,13 +85,17 @@ public class CatalystEvents {
             }
             insert(state, level, pos, proxy, false);
             if (!creative) {
-                SimpleFluidContent content = held.get(ModDataComponents.FLUID.get());
-                FluidStack left = content.copy();
-                left.shrink(COST_MB);
-                if (left.isEmpty()) {
-                    held.remove(ModDataComponents.FLUID.get());
+                if (Config.catalystConsumed()) {
+                    held.shrink(1); // used up like a cake
                 } else {
-                    held.set(ModDataComponents.FLUID.get(), SimpleFluidContent.copyOf(left));
+                    SimpleFluidContent content = held.get(ModDataComponents.FLUID.get());
+                    FluidStack left = content.copy();
+                    left.shrink(COST_MB);
+                    if (left.isEmpty()) {
+                        held.remove(ModDataComponents.FLUID.get());
+                    } else {
+                        held.set(ModDataComponents.FLUID.get(), SimpleFluidContent.copyOf(left));
+                    }
                 }
             }
         } catch (Throwable t) {

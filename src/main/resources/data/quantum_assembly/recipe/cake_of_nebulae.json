@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    { "item": "quantum_assembly:master_chefs_cauldron" },
+    { "item": "minecraft:echo_shard" },
+    { "item": "minecraft:dragon_breath" },
+    {
+      "type": "neoforge:compound",
+      "children": [
+        { "item": "create:powdered_obsidian" },
+        { "tag": "c:dusts/obsidian" }
+      ]
+    }
+  ],
+  "result": { "id": "quantum_assembly:cake_of_nebulae", "count": 1 }
+}

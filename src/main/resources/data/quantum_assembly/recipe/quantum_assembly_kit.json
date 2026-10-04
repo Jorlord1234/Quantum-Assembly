@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    { "item": "sophisticatedbackpacks:netherite_backpack" },
+    { "tag": "create:toolboxes" },
+    { "item": "sophisticatedbackpacks:inception_upgrade" },
+    { "item": "sophisticatedbackpacks:stack_upgrade_tier_4" },
+    { "item": "sophisticatedbackpacks:everlasting_upgrade" }
+  ],
+  "result": { "id": "quantum_assembly:quantum_assembly_kit", "count": 1 }
+}

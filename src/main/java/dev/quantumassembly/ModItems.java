@@ -18,8 +18,8 @@ public class ModItems {
     public static final DeferredItem<Item> NOVA_TEMPLATE = ITEMS.registerSimpleItem("nova_template");
     public static final DeferredItem<UncompletedNovaCoinItem> UNCOMPLETED_NOVA_COIN = ITEMS.registerItem(
             "uncompleted_nova_coin", UncompletedNovaCoinItem::new, new Item.Properties());
-    public static final DeferredItem<Item> NOVA_COIN = ITEMS.registerSimpleItem("nova_coin",
-            new Item.Properties().rarity(Rarity.EPIC));
+    public static final DeferredItem<NovaCoinItem> NOVA_COIN = ITEMS.registerItem("nova_coin",
+            NovaCoinItem::new, new Item.Properties().rarity(Rarity.EPIC));
     public static final DeferredItem<Item> CAKE_OF_NEBULAE = ITEMS.registerSimpleItem("cake_of_nebulae",
             new Item.Properties().rarity(Rarity.RARE));
     public static final DeferredItem<Item> STARGLASS = ITEMS.registerSimpleItem("starglass");
@@ -31,6 +31,6 @@ public class ModItems {
             "starglass_ore", ModBlocks.STARGLASS_ORE);
     public static final DeferredItem<BlockItem> QUANTUM_ASSEMBLY_KIT = ITEMS.registerSimpleBlockItem(
             "quantum_assembly_kit", ModBlocks.QUANTUM_ASSEMBLY_KIT);
-    public static final DeferredItem<BlockItem> MASTER_CHEFS_CAULDRON = ITEMS.registerSimpleBlockItem(
-            "master_chefs_cauldron", ModBlocks.MASTER_CHEFS_CAULDRON);
+    public static final DeferredItem<BlockItem> MASTER_CHEFS_CAULDRON = ITEMS.register(
+            "master_chefs_cauldron", () -> new ReturningBlockItem(ModBlocks.MASTER_CHEFS_CAULDRON.get(), new Item.Properties()));
 }

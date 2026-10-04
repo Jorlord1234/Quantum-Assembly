@@ -1,6 +1,6 @@
-# Quantum Assembly (version 0.3)
+# Quantum Assembly (version 0.4)
 
-This is the third test version. It checks that the basics work.
+This is the fourth test version. It checks that the basics work.
 
 ## What is inside
 - All the items and blocks, with their pictures

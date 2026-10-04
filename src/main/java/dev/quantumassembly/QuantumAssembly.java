@@ -30,6 +30,7 @@ public class QuantumAssembly {
         modEventBus.addListener(this::registerCapabilities);
         modEventBus.addListener((FMLCommonSetupEvent event) -> event.enqueueWork(WaystonesCompat::register));
         NeoForge.EVENT_BUS.addListener(EventPriority.HIGH, CatalystEvents::onRightClick);
+        NeoForge.EVENT_BUS.addListener(MasterChefEvents::onAdvancement);
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
