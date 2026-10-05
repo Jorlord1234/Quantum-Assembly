@@ -2,34 +2,20 @@ package dev.quantumassembly;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Equipable;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-/** A helmet that never breaks and gives Farmer's Delight Nourishment while worn. */
-public class ChefsHatItem extends Item implements Equipable {
+/** A very tall hat that never breaks and gives Farmer's Delight Nourishment while worn. */
+public class ChefsHatItem extends ArmorItem {
     private static final ResourceLocation NOURISHMENT = ResourceLocation.fromNamespaceAndPath("farmersdelight", "nourishment");
 
     public ChefsHatItem(Properties properties) {
-        super(properties.stacksTo(1));
-    }
-
-    @Override
-    public EquipmentSlot getEquipmentSlot() {
-        return EquipmentSlot.HEAD;
-    }
-
-    @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        return swapWithEquipmentSlot(this, level, player, hand);
+        super(ModArmorMaterials.CHEF, ArmorItem.Type.HELMET, properties.stacksTo(1));
     }
 
     @Override

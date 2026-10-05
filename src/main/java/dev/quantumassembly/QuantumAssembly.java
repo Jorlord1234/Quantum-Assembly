@@ -4,7 +4,6 @@ import com.mojang.logging.LogUtils;
 import org.slf4j.Logger;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
@@ -24,13 +23,14 @@ public class QuantumAssembly {
     public QuantumAssembly(IEventBus modEventBus, ModContainer modContainer) {
         ModBlocks.BLOCKS.register(modEventBus);
         ModBlockEntities.BLOCK_ENTITIES.register(modEventBus);
+        ModArmorMaterials.MATERIALS.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
         ModDataComponents.COMPONENTS.register(modEventBus);
         ModTabs.TABS.register(modEventBus);
 
         modEventBus.addListener(this::registerCapabilities);
+        modEventBus.addListener(this::addCauldronAsCookingPot);
         modEventBus.addListener((FMLCommonSetupEvent event) -> event.enqueueWork(WaystonesCompat::register));
-        NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, CatalystEvents::onRightClick);
         NeoForge.EVENT_BUS.addListener(MasterChefEvents::onAdvancement);
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
@@ -52,5 +52,11 @@ public class QuantumAssembly {
                     }
                 },
                 ModItems.EXPERIENCE_CATALYST.get());
+    }
+
+    /** Lets Farmer's Delight's cooking pot block entity also live inside our golden Cauldron. */
+    private void addCauldronAsCookingPot(net.neoforged.neoforge.event.BlockEntityTypeAddBlocksEvent event) {
+        event.modify(vectorwing.farmersdelight.common.registry.ModBlockEntityTypes.COOKING_POT.get(),
+                ModBlocks.MASTER_CHEFS_CAULDRON.get());
     }
 }

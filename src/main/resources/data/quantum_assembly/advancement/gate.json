@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "id": "quantum_assembly:quantum_gate"
+    },
+    "title": {
+      "translate": "advancement.quantum_assembly.gate.title"
+    },
+    "description": {
+      "translate": "advancement.quantum_assembly.gate.desc"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "get": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "quantum_assembly:quantum_gate"
+          }
+        ]
+      }
+    }
+  },
+  "parent": "quantum_assembly:kit"
+}

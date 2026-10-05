@@ -31,7 +31,7 @@ This is the ninth test version. It checks that the basics work.
 
 ## How to use it
 Put the .jar in the mods folder of your modpack.
-It needs the same pack you already have (NeoForge 1.21.1).
+It needs the same pack you already have (NeoForge 1.21.1) with Farmer's Delight.
 
 ## If something goes wrong
 Copy the first red error message and send it to Claude.

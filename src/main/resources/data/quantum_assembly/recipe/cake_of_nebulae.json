@@ -1,35 +1,15 @@
 {
-  "type": "create:mixing",
+  "type": "farmersdelight:cooking",
+  "experience": 1.0,
+  "cookingtime": 600,
   "ingredients": [
     {
-      "item": "quantum_assembly:master_chefs_cauldron"
-    },
-    {
-      "item": "minecraft:echo_shard"
-    },
-    {
-      "item": "minecraft:dragon_breath"
-    },
-    {
-      "type": "neoforge:compound",
-      "children": [
-        {
-          "item": "create:powdered_obsidian"
-        },
-        {
-          "tag": "c:dusts/obsidian"
-        }
-      ]
+      "item": "quantum_assembly:nebula_batter"
     }
   ],
-  "results": [
-    {
-      "id": "quantum_assembly:cake_of_nebulae",
-      "count": 1
-    },
-    {
-      "id": "quantum_assembly:master_chefs_cauldron",
-      "count": 1
-    }
-  ]
+  "recipe_book_tab": "meals",
+  "result": {
+    "count": 1,
+    "id": "quantum_assembly:cake_of_nebulae"
+  }
 }

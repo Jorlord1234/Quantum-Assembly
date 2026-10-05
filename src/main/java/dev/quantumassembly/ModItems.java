@@ -22,6 +22,10 @@ public class ModItems {
             NovaCoinItem::new, new Item.Properties().rarity(Rarity.EPIC));
     public static final DeferredItem<Item> CAKE_OF_NEBULAE = ITEMS.registerSimpleItem("cake_of_nebulae",
             new Item.Properties().rarity(Rarity.RARE));
+    public static final DeferredItem<Item> CAKE_BASE = ITEMS.registerSimpleItem("cake_base");
+    public static final DeferredItem<Item> NEBULA_BATTER = ITEMS.registerSimpleItem("nebula_batter");
+    /** Hidden helper item. Create: Enchantment Industry sees it as a super experience fuel. Never obtainable. */
+    public static final DeferredItem<Item> SUPER_EXPERIENCE_CHARGE = ITEMS.registerSimpleItem("super_experience_charge");
     public static final DeferredItem<Item> STARGLASS = ITEMS.registerSimpleItem("starglass");
 
     public static final DeferredItem<ChefsHatItem> CHEFS_HAT = ITEMS.registerItem(

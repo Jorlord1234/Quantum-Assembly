@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "quantum_assembly:item/chefs_hat"
+    "layer0": "quantum_assembly:item/nebula_batter"
   }
 }

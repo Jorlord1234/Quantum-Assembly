@@ -24,3 +24,14 @@ Tell Claude which ones fail.
 18. [ ] Break the Kit: items drop. Break the burner during the ritual: items drop, ritual stops
 19. [ ] Nothing happens if the burner is cold or the Kit is somewhere else
 Note: the Nebula burner no longer heats Basins (only for the ritual), as the design document suggested.
+
+# Extra tests for 0.10
+15. [ ] Nebula Blaze Burner looks purple when lit and dark when cold
+16. [ ] Hold a Catalyst with 1+ bucket and right-click a Blaze Enchanter. It says "Super experience added"
+17. [ ] A normal Create Blaze Burner does NOTHING when you right-click it with a Catalyst or a Cake
+18. [ ] Throw an Uncompleted Nova Coin into the Overworld void: nothing. In the End void: it becomes a Nova Coin
+19. [ ] Mine Starglass Ore several times: drops 1 to 4
+20. [ ] Wear the Chef's Hat. It is very tall
+21. [ ] Place the Cauldron. Put it over a heat source. It opens the cooking pot screen
+22. [ ] Make Cake Base (press), Nebula Batter (spout) and cook the Cake in the Cauldron
+23. [ ] The advancements tab "Quantum Assembly" shows up

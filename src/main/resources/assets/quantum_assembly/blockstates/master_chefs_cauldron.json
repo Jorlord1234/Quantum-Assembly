@@ -1,8 +1,94 @@
 {
   "variants": {
-    "facing=north": { "model": "quantum_assembly:block/master_chefs_cauldron" },
-    "facing=east":  { "model": "quantum_assembly:block/master_chefs_cauldron", "y": 90 },
-    "facing=south": { "model": "quantum_assembly:block/master_chefs_cauldron", "y": 180 },
-    "facing=west":  { "model": "quantum_assembly:block/master_chefs_cauldron", "y": 270 }
+    "facing=north,support=none,waterlogged=false": {
+      "model": "quantum_assembly:block/master_chefs_cauldron"
+    },
+    "facing=north,support=none,waterlogged=true": {
+      "model": "quantum_assembly:block/master_chefs_cauldron"
+    },
+    "facing=north,support=tray,waterlogged=false": {
+      "model": "quantum_assembly:block/master_chefs_cauldron"
+    },
+    "facing=north,support=tray,waterlogged=true": {
+      "model": "quantum_assembly:block/master_chefs_cauldron"
+    },
+    "facing=north,support=handle,waterlogged=false": {
+      "model": "quantum_assembly:block/master_chefs_cauldron"
+    },
+    "facing=north,support=handle,waterlogged=true": {
+      "model": "quantum_assembly:block/master_chefs_cauldron"
+    },
+    "facing=east,support=none,waterlogged=false": {
+      "model": "quantum_assembly:block/master_chefs_cauldron",
+      "y": 90
+    },
+    "facing=east,support=none,waterlogged=true": {
+      "model": "quantum_assembly:block/master_chefs_cauldron",
+      "y": 90
+    },
+    "facing=east,support=tray,waterlogged=false": {
+      "model": "quantum_assembly:block/master_chefs_cauldron",
+      "y": 90
+    },
+    "facing=east,support=tray,waterlogged=true": {
+      "model": "quantum_assembly:block/master_chefs_cauldron",
+      "y": 90
+    },
+    "facing=east,support=handle,waterlogged=false": {
+      "model": "quantum_assembly:block/master_chefs_cauldron",
+      "y": 90
+    },
+    "facing=east,support=handle,waterlogged=true": {
+      "model": "quantum_assembly:block/master_chefs_cauldron",
+      "y": 90
+    },
+    "facing=south,support=none,waterlogged=false": {
+      "model": "quantum_assembly:block/master_chefs_cauldron",
+      "y": 180
+    },
+    "facing=south,support=none,waterlogged=true": {
+      "model": "quantum_assembly:block/master_chefs_cauldron",
+      "y": 180
+    },
+    "facing=south,support=tray,waterlogged=false": {
+      "model": "quantum_assembly:block/master_chefs_cauldron",
+      "y": 180
+    },
+    "facing=south,support=tray,waterlogged=true": {
+      "model": "quantum_assembly:block/master_chefs_cauldron",
+      "y": 180
+    },
+    "facing=south,support=handle,waterlogged=false": {
+      "model": "quantum_assembly:block/master_chefs_cauldron",
+      "y": 180
+    },
+    "facing=south,support=handle,waterlogged=true": {
+      "model": "quantum_assembly:block/master_chefs_cauldron",
+      "y": 180
+    },
+    "facing=west,support=none,waterlogged=false": {
+      "model": "quantum_assembly:block/master_chefs_cauldron",
+      "y": 270
+    },
+    "facing=west,support=none,waterlogged=true": {
+      "model": "quantum_assembly:block/master_chefs_cauldron",
+      "y": 270
+    },
+    "facing=west,support=tray,waterlogged=false": {
+      "model": "quantum_assembly:block/master_chefs_cauldron",
+      "y": 270
+    },
+    "facing=west,support=tray,waterlogged=true": {
+      "model": "quantum_assembly:block/master_chefs_cauldron",
+      "y": 270
+    },
+    "facing=west,support=handle,waterlogged=false": {
+      "model": "quantum_assembly:block/master_chefs_cauldron",
+      "y": 270
+    },
+    "facing=west,support=handle,waterlogged=true": {
+      "model": "quantum_assembly:block/master_chefs_cauldron",
+      "y": 270
+    }
   }
 }

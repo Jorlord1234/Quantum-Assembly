@@ -8,7 +8,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-/** Thrown into the void, this coin is finished into a Nova Coin and returns to the nearest player. */
+/** Thrown into the void of THE END, this coin is finished into a Nova Coin and returns to the nearest player. */
 public class UncompletedNovaCoinItem extends Item {
     public UncompletedNovaCoinItem(Properties properties) {
         super(properties);
@@ -17,7 +17,7 @@ public class UncompletedNovaCoinItem extends Item {
     @Override
     public boolean onEntityItemUpdate(ItemStack stack, ItemEntity entity) {
         Level level = entity.level();
-        if (level.isClientSide || entity.getY() >= level.getMinBuildHeight() - 4) {
+        if (level.isClientSide || level.dimension() != Level.END || entity.getY() >= level.getMinBuildHeight() - 4) {
             return false;
         }
         Player player = level.getNearestPlayer(entity.getX(), entity.getY(), entity.getZ(), 512.0, false);
