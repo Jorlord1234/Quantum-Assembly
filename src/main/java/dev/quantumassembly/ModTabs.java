@@ -30,7 +30,6 @@ public class ModTabs {
                                             SimpleFluidContent.copyOf(new FluidStack(fluid, Config.capacityMb())));
                                     output.accept(full);
                                 });
-                        output.accept(ModItems.INCOMPLETE_EXPERIENCE_CATALYST.get());
                         output.accept(ModItems.NOVA_TEMPLATE.get());
                         output.accept(ModItems.UNCOMPLETED_NOVA_COIN.get());
                         output.accept(ModItems.NOVA_COIN.get());
@@ -38,6 +37,8 @@ public class ModTabs {
                         output.accept(ModItems.CHEFS_HAT.get());
                         output.accept(ModItems.STARGLASS.get());
                         output.accept(ModItems.STARGLASS_ORE.get());
+                        output.accept(ModItems.NEBULA_BLAZE_BURNER.get());
+                        output.accept(ModItems.QUANTUM_GATE.get());
                         output.accept(ModItems.QUANTUM_ASSEMBLY_KIT.get());
                         output.accept(ModItems.MASTER_CHEFS_CAULDRON.get());
                     })

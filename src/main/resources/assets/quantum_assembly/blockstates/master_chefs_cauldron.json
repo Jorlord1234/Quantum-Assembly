@@ -1,7 +1,8 @@
 {
   "variants": {
-    "": {
-      "model": "quantum_assembly:block/master_chefs_cauldron"
-    }
+    "facing=north": { "model": "quantum_assembly:block/master_chefs_cauldron" },
+    "facing=east":  { "model": "quantum_assembly:block/master_chefs_cauldron", "y": 90 },
+    "facing=south": { "model": "quantum_assembly:block/master_chefs_cauldron", "y": 180 },
+    "facing=west":  { "model": "quantum_assembly:block/master_chefs_cauldron", "y": 270 }
   }
 }

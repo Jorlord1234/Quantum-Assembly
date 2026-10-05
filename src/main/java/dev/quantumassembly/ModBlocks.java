@@ -28,19 +28,28 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.STONE));
 
-    public static final DeferredBlock<ShapedBlock> QUANTUM_ASSEMBLY_KIT = BLOCKS.registerBlock("quantum_assembly_kit",
-            props -> new ShapedBlock(props, KIT_SHAPE),
+    public static final DeferredBlock<KitBlock> QUANTUM_ASSEMBLY_KIT = BLOCKS.registerBlock("quantum_assembly_kit",
+            props -> new KitBlock(props, KIT_SHAPE),
             BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_GRAY)
                     .strength(2.0F, 6.0F)
                     .sound(SoundType.NETHERITE_BLOCK)
                     .noOcclusion());
 
-    public static final DeferredBlock<ShapedBlock> MASTER_CHEFS_CAULDRON = BLOCKS.registerBlock("master_chefs_cauldron",
-            props -> new ShapedBlock(props, CAULDRON_SHAPE),
+    public static final DeferredBlock<FacingShapedBlock> MASTER_CHEFS_CAULDRON = BLOCKS.registerBlock("master_chefs_cauldron",
+            props -> new FacingShapedBlock(props, CAULDRON_SHAPE),
             BlockBehaviour.Properties.of()
                     .mapColor(MapColor.GOLD)
                     .strength(2.0F, 6.0F)
                     .sound(SoundType.METAL)
                     .noOcclusion());
+
+    public static final DeferredBlock<NebulaBurnerBlock> NEBULA_BLAZE_BURNER = BLOCKS.registerBlock("nebula_blaze_burner",
+            NebulaBurnerBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_PURPLE)
+                    .strength(2.0F, 6.0F)
+                    .sound(SoundType.NETHERITE_BLOCK)
+                    .noOcclusion()
+                    .lightLevel(state -> NebulaBurnerBlock.isLit(state) ? 15 : 0));
 }

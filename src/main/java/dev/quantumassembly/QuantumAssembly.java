@@ -23,13 +23,14 @@ public class QuantumAssembly {
 
     public QuantumAssembly(IEventBus modEventBus, ModContainer modContainer) {
         ModBlocks.BLOCKS.register(modEventBus);
+        ModBlockEntities.BLOCK_ENTITIES.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
         ModDataComponents.COMPONENTS.register(modEventBus);
         ModTabs.TABS.register(modEventBus);
 
         modEventBus.addListener(this::registerCapabilities);
         modEventBus.addListener((FMLCommonSetupEvent event) -> event.enqueueWork(WaystonesCompat::register));
-        NeoForge.EVENT_BUS.addListener(EventPriority.HIGH, CatalystEvents::onRightClick);
+        NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, CatalystEvents::onRightClick);
         NeoForge.EVENT_BUS.addListener(MasterChefEvents::onAdvancement);
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }

@@ -1,0 +1,141 @@
+{
+  "loader": "neoforge:composite",
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "quantum_assembly:block/nebula_blaze"
+  },
+  "children": {
+    "cage": {
+      "loader": "neoforge:obj",
+      "flip_v": true,
+      "model": "create:models/block/blaze_burner/blaze_cage.obj",
+      "textures": {
+        "0": "create:block/blaze_heater_brazier",
+        "particle": "create:block/dark_metal_block"
+      }
+    },
+    "blaze": {
+      "textures": {
+        "1": "quantum_assembly:block/nebula_blaze"
+      },
+      "elements": [
+        {
+          "from": [
+            4,
+            6,
+            4
+          ],
+          "to": [
+            12,
+            14,
+            12
+          ],
+          "faces": {
+            "north": {
+              "uv": [
+                8,
+                0,
+                16,
+                8
+              ],
+              "texture": "#1"
+            },
+            "east": {
+              "uv": [
+                0,
+                0,
+                8,
+                8
+              ],
+              "texture": "#1"
+            },
+            "south": {
+              "uv": [
+                0,
+                0,
+                8,
+                8
+              ],
+              "texture": "#1"
+            },
+            "west": {
+              "uv": [
+                0,
+                0,
+                8,
+                8
+              ],
+              "texture": "#1"
+            },
+            "up": {
+              "uv": [
+                0,
+                8,
+                8,
+                16
+              ],
+              "texture": "#1"
+            },
+            "down": {
+              "uv": [
+                8,
+                8,
+                16,
+                16
+              ],
+              "texture": "#1"
+            }
+          }
+        }
+      ]
+    },
+    "rods_small": {
+      "loader": "neoforge:obj",
+      "flip_v": true,
+      "model": "create:models/block/blaze_burner/blaze_rods_small.obj",
+      "textures": {
+        "0": "quantum_assembly:block/nebula_blaze"
+      }
+    },
+    "rods_large": {
+      "loader": "neoforge:obj",
+      "flip_v": true,
+      "model": "create:models/block/blaze_burner/blaze_rods_large.obj",
+      "textures": {
+        "0": "quantum_assembly:block/nebula_blaze"
+      }
+    }
+  },
+  "item_render_order": [
+    "cage",
+    "blaze",
+    "rods_small",
+    "rods_large"
+  ],
+  "display": {
+    "gui": {
+      "rotation": [
+        30,
+        225,
+        0
+      ],
+      "scale": [
+        0.7,
+        0.7,
+        0.7
+      ]
+    },
+    "fixed": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    }
+  }
+}

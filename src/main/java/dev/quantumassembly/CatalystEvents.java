@@ -1,51 +1,66 @@
 package dev.quantumassembly;
 
-import java.lang.reflect.Method;
-
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
 import net.neoforged.fml.ModList;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.SimpleFluidContent;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
 /**
- * Right-click a Create Blaze Burner with a Catalyst that holds enough Liquid Experience
- * and the burner becomes SUPERHEATED (like a Blaze Cake). This runs before other mods,
- * so the Catalyst never feeds normal experience to the burner.
- * Create is called through reflection, so this mod still loads without Create.
+ * Right-click a Create Blaze Burner with an Experience Catalyst: the Catalyst pays 1 bucket of its
+ * Liquid Experience and the burner receives SUPER (hyper) Liquid Experience instead.
+ * The Catalyst itself is never used up. Normal experience is never poured into the burner.
  */
 public class CatalystEvents {
-    /** Liquid Experience used per superheat (millibuckets). */
     public static final int COST_MB = 1000;
 
-    private static boolean resolved = false;
-    private static Class<?> burnerBlockClass;
-    private static Method tryInsert;
+    private static Fluid superFluid;
+    private static boolean searched = false;
 
-    private static void resolve() {
-        if (resolved) {
-            return;
+    /** Finds the Super/Hyper Liquid Experience fluid of Create: Enchantment Industry (any version). */
+    private static Fluid findSuperFluid() {
+        if (!searched || superFluid == null) {
+            searched = true;
+            ResourceLocation preferred = ResourceLocation.fromNamespaceAndPath("create_enchantment_industry", "hyper_experience");
+            superFluid = BuiltInRegistries.FLUID.getOptional(preferred).filter(f -> !f.defaultFluidState().isEmpty()).orElse(null);
+            if (superFluid == null) {
+                for (ResourceLocation id : BuiltInRegistries.FLUID.keySet()) {
+                    String path = id.getPath();
+                    if (!path.contains("flowing") && path.contains("experience")
+                            && (path.contains("hyper") || path.contains("super"))) {
+                        superFluid = BuiltInRegistries.FLUID.get(id);
+                        break;
+                    }
+                }
+            }
         }
-        resolved = true;
-        try {
-            burnerBlockClass = Class.forName("com.simibubi.create.content.processing.burner.BlazeBurnerBlock");
-            tryInsert = burnerBlockClass.getMethod("tryInsert", BlockState.class, Level.class, BlockPos.class,
-                    ItemStack.class, boolean.class, boolean.class, boolean.class);
-        } catch (Throwable t) {
-            QuantumAssembly.LOGGER.warn("Could not hook into Create's Blaze Burner: {}", t.toString());
-            tryInsert = null;
-        }
+        return superFluid;
     }
 
-    @SuppressWarnings("unchecked")
-    private static InteractionResultHolder<ItemStack> insert(BlockState state, Level level, BlockPos pos,
-                                                             ItemStack proxy, boolean simulate) throws Exception {
-        return (InteractionResultHolder<ItemStack>) tryInsert.invoke(null, state, level, pos, proxy, true, false, simulate);
+    private static IFluidHandler burnerHandler(Level level, BlockPos pos, BlockState state) {
+        BlockEntity be = level.getBlockEntity(pos);
+        IFluidHandler h = level.getCapability(Capabilities.FluidHandler.BLOCK, pos, state, be, null);
+        if (h != null) {
+            return h;
+        }
+        for (Direction d : Direction.values()) {
+            h = level.getCapability(Capabilities.FluidHandler.BLOCK, pos, state, be, d);
+            if (h != null) {
+                return h;
+            }
+        }
+        return null;
     }
 
     public static void onRightClick(PlayerInteractEvent.RightClickBlock event) {
@@ -53,53 +68,48 @@ public class CatalystEvents {
         if (!held.is(ModItems.EXPERIENCE_CATALYST.get()) || !ModList.get().isLoaded("create")) {
             return;
         }
-        resolve();
-        if (tryInsert == null) {
-            return;
-        }
         Level level = event.getLevel();
         BlockPos pos = event.getPos();
         BlockState state = level.getBlockState(pos);
-        if (!burnerBlockClass.isInstance(state.getBlock())) {
-            return;
+        ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(state.getBlock());
+        String ns = blockId.getNamespace();
+        boolean createFamily = ns.equals("create") || ns.equals("create_enchantment_industry") || ns.equals("create_dragons_plus");
+        if (!createFamily || !blockId.getPath().contains("blaze")) {
+            return; // only Blaze Burners / Blaze Enchanters / Workstations
         }
 
         boolean creative = event.getEntity().isCreative();
         if (!creative && ExperienceCatalystItem.stored(held) < COST_MB) {
-            return; // not enough experience: leave it to other mods
+            return; // too little experience: leave it to other mods
         }
 
-        // The Cake of Nebulae is registered as superheated fuel, so we use it as the "key".
-        ItemStack proxy = new ItemStack(ModItems.CAKE_OF_NEBULAE.get());
-        try {
-            InteractionResultHolder<ItemStack> sim = insert(state, level, pos, proxy, true);
-            // Cancel either way so normal experience is never poured in.
-            event.setCanceled(true);
-            if (!sim.getResult().consumesAction()) {
-                event.setCancellationResult(InteractionResult.FAIL);
-                return;
+        // From here on we always cancel, so the Catalyst can never pour normal experience in.
+        event.setCanceled(true);
+        Fluid fluid = findSuperFluid();
+        IFluidHandler handler = fluid == null ? null : burnerHandler(level, pos, state);
+        if (handler == null) {
+            event.setCancellationResult(InteractionResult.FAIL);
+            return;
+        }
+        int accepted = handler.fill(new FluidStack(fluid, COST_MB), IFluidHandler.FluidAction.SIMULATE);
+        if (accepted <= 0) {
+            event.setCancellationResult(InteractionResult.FAIL);
+            return;
+        }
+        event.setCancellationResult(InteractionResult.SUCCESS);
+        if (level.isClientSide) {
+            return;
+        }
+        int filled = handler.fill(new FluidStack(fluid, accepted), IFluidHandler.FluidAction.EXECUTE);
+        if (filled > 0 && !creative) {
+            SimpleFluidContent content = held.get(ModDataComponents.FLUID.get());
+            FluidStack left = content.copy();
+            left.shrink(filled);
+            if (left.isEmpty()) {
+                held.remove(ModDataComponents.FLUID.get());
+            } else {
+                held.set(ModDataComponents.FLUID.get(), SimpleFluidContent.copyOf(left));
             }
-            event.setCancellationResult(InteractionResult.SUCCESS);
-            if (level.isClientSide) {
-                return;
-            }
-            insert(state, level, pos, proxy, false);
-            if (!creative) {
-                if (Config.catalystConsumed()) {
-                    held.shrink(1); // used up like a cake
-                } else {
-                    SimpleFluidContent content = held.get(ModDataComponents.FLUID.get());
-                    FluidStack left = content.copy();
-                    left.shrink(COST_MB);
-                    if (left.isEmpty()) {
-                        held.remove(ModDataComponents.FLUID.get());
-                    } else {
-                        held.set(ModDataComponents.FLUID.get(), SimpleFluidContent.copyOf(left));
-                    }
-                }
-            }
-        } catch (Throwable t) {
-            QuantumAssembly.LOGGER.warn("Superheating failed: {}", t.toString());
         }
     }
 }

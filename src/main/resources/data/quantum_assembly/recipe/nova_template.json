@@ -1,6 +1,5 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
+  "type": "create:mixing",
   "ingredients": [
     {
       "item": "minecraft:netherite_upgrade_smithing_template"
@@ -15,8 +14,10 @@
       "item": "minecraft:netherite_ingot"
     }
   ],
-  "result": {
-    "id": "quantum_assembly:nova_template",
-    "count": 1
-  }
+  "results": [
+    {
+      "id": "quantum_assembly:nova_template",
+      "count": 1
+    }
+  ]
 }

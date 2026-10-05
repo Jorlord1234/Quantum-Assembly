@@ -11,5 +11,7 @@
   "block.quantum_assembly.starglass_ore": "Starglass Ore",
   "block.quantum_assembly.quantum_assembly_kit": "Quantum Assembly Kit",
   "block.quantum_assembly.master_chefs_cauldron": "Master Chef's Cauldron",
-  "tooltip.quantum_assembly.experience": "Experience: %s / %s buckets"
+  "tooltip.quantum_assembly.experience": "Experience: %s / %s buckets",
+  "block.quantum_assembly.nebula_blaze_burner": "Nebula Blaze Burner",
+  "item.quantum_assembly.quantum_gate": "Quantum Gate (test item)"
 }

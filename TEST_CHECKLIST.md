@@ -1,17 +1,26 @@
-# Test checklist for version 0.4
+# Test checklist for version 0.9
 
 Tell Claude which ones fail.
 
-1. [ ] Right-click the Nova Coin: the Waystones teleport menu opens
-2. [ ] Teleporting from that menu costs no XP, and the coin stays in your inventory
-3. [ ] Experience Catalyst on a Blaze Burner: burner goes PURPLE, the Catalyst is used up
-4. [ ] Cake of Nebulae on a Blaze Burner: burner goes PURPLE
-5. [ ] Chef's Hat looks right (texture) in hand and on your head
-6. [ ] Earning the "Master Chef" advancement gives the Cauldron and the Hat
-7. [ ] Cake of Nebulae recipe exists: Cauldron + Echo Shard + Dragon's Breath + Obsidian Dust (Cauldron comes back)
-8. [ ] Quantum Assembly Kit recipe exists: Netherite Backpack + Toolbox + Inception + Stack Tier 4 + Everlasting
-9. [ ] Unfinished Catalyst progress bar, void coin and netherite-only ore still work (from 0.3)
+1. [ ] Catalyst on a Blaze Burner: burner gets SUPER Liquid Experience, Catalyst loses 1 bucket, item is NOT used up, no normal XP goes in
+2. [ ] Kit recipe is shaped: Inception top, Netherite Backpack / Stack Tier 4 / Toolbox middle row, Everlasting bottom
+3. [ ] Chef's Hat looks right in hand and on your head
+4. [ ] Gems on the Quantum Assembly Kit look right
+5. [ ] Nova Template and Cake of Nebulae are made in a Mixer (the Cauldron comes back out of the cake recipe)
+6. [ ] Cauldron and Kit face you when placed (all 4 directions)
+7. [ ] Cake of Nebulae on a Blaze Burner: superheated for a very long time
+8. [ ] Unfinished Catalyst no longer shows in the creative tab (it still appears inside Sequenced Assembly)
+9. [ ] Nova Coin menu, Master Chef reward, void coin, netherite-only ore still work (from 0.4)
 
-Config file (config/quantum_assembly-common.toml):
-- catalystConsumedOnUse = true / false
-- masterChefAdvancement = "modid:path" (only needed if the advancement is not found automatically)
+## New in 0.9: the Nebula Blaze Burner ritual
+10. [ ] Smithing table: Nova Template + Blaze Burner + Dragon Head = Nebula Blaze Burner (template used up)
+11. [ ] Cold burner looks dark and cosmic
+12. [ ] Cake of Nebulae on it: purple flame + purple particles, cake used up
+13. [ ] After 5 minutes it goes cold again (config: nebulaBurnerLitSeconds, 0 = forever)
+14. [ ] Right-click the Kit with a FULL Catalyst, a Nova Coin, a Totem: each goes in its slot (action bar message), wrong items do nothing, not-full Catalyst is refused
+15. [ ] Shift + empty hand on the Kit gives the items back
+16. [ ] Kit on a LIT burner with all 3 items: 10 second ritual with particles (config: ritualSeconds)
+17. [ ] Result: the 3 items are used up, a "Quantum Gate (test item)" pops out, burner goes cold, Kit stays
+18. [ ] Break the Kit: items drop. Break the burner during the ritual: items drop, ritual stops
+19. [ ] Nothing happens if the burner is cold or the Kit is somewhere else
+Note: the Nebula burner no longer heats Basins (only for the ritual), as the design document suggested.

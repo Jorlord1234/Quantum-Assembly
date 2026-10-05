@@ -1,12 +1,30 @@
 {
-  "type": "minecraft:crafting_shapeless",
+  "type": "minecraft:crafting_shaped",
   "category": "misc",
-  "ingredients": [
-    { "item": "sophisticatedbackpacks:netherite_backpack" },
-    { "tag": "create:toolboxes" },
-    { "item": "sophisticatedbackpacks:inception_upgrade" },
-    { "item": "sophisticatedbackpacks:stack_upgrade_tier_4" },
-    { "item": "sophisticatedbackpacks:everlasting_upgrade" }
+  "pattern": [
+    " I ",
+    "BST",
+    " E "
   ],
-  "result": { "id": "quantum_assembly:quantum_assembly_kit", "count": 1 }
+  "key": {
+    "I": {
+      "item": "sophisticatedbackpacks:inception_upgrade"
+    },
+    "B": {
+      "item": "sophisticatedbackpacks:netherite_backpack"
+    },
+    "S": {
+      "item": "sophisticatedbackpacks:stack_upgrade_tier_4"
+    },
+    "T": {
+      "tag": "create:toolboxes"
+    },
+    "E": {
+      "item": "sophisticatedbackpacks:everlasting_upgrade"
+    }
+  },
+  "result": {
+    "id": "quantum_assembly:quantum_assembly_kit",
+    "count": 1
+  }
 }

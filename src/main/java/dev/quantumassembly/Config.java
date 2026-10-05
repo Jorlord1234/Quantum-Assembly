@@ -9,31 +9,42 @@ public class Config {
             .comment("How many buckets of Liquid Experience the Experience Catalyst can hold.")
             .defineInRange("catalystCapacityBuckets", 999, 1, 9999);
 
-    public static final ModConfigSpec.BooleanValue CATALYST_CONSUMED = BUILDER
-            .comment("true: using the Experience Catalyst on a Blaze Burner uses up the whole item (like a Cake of Nebulae).",
-                    "false: it keeps the item and only uses 1 bucket of Liquid Experience.")
-            .define("catalystConsumedOnUse", true);
-
     public static final ModConfigSpec.ConfigValue<String> MASTER_CHEF_ADVANCEMENT = BUILDER
             .comment("Advancement id that gives the Master Chef's Cauldron and Chef's Hat (example: farmersdelight:main/master_chef).",
                     "Any advancement titled 'Master Chef' or with 'master_chef' in its id also works.")
             .define("masterChefAdvancement", "");
 
-    static final ModConfigSpec SPEC = BUILDER.build();
+    public static final ModConfigSpec.IntValue BURNER_LIT_SECONDS = BUILDER
+            .comment("How long the Nebula Blaze Burner stays lit after a Cake of Nebulae (seconds). 0 = forever.")
+            .defineInRange("nebulaBurnerLitSeconds", 300, 0, 86400);
 
-    public static boolean catalystConsumed() {
-        try {
-            return CATALYST_CONSUMED.get();
-        } catch (IllegalStateException notLoadedYet) {
-            return true;
-        }
-    }
+    public static final ModConfigSpec.IntValue RITUAL_SECONDS = BUILDER
+            .comment("How long the Quantum Assembly Kit ritual takes (seconds).")
+            .defineInRange("ritualSeconds", 10, 1, 600);
+
+    static final ModConfigSpec SPEC = BUILDER.build();
 
     public static String masterChefAdvancement() {
         try {
             return MASTER_CHEF_ADVANCEMENT.get();
         } catch (IllegalStateException notLoadedYet) {
             return "";
+        }
+    }
+
+    public static int burnerLitTicks() {
+        try {
+            return BURNER_LIT_SECONDS.get() * 20;
+        } catch (IllegalStateException notLoadedYet) {
+            return 300 * 20;
+        }
+    }
+
+    public static int ritualTicks() {
+        try {
+            return RITUAL_SECONDS.get() * 20;
+        } catch (IllegalStateException notLoadedYet) {
+            return 10 * 20;
         }
     }
 
