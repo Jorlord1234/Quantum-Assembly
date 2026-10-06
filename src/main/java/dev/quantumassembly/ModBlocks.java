@@ -36,8 +36,8 @@ public class ModBlocks {
                     .sound(SoundType.NETHERITE_BLOCK)
                     .noOcclusion());
 
-    public static final DeferredBlock<FacingShapedBlock> MASTER_CHEFS_CAULDRON = BLOCKS.registerBlock("master_chefs_cauldron",
-            props -> new FacingShapedBlock(props, CAULDRON_SHAPE),
+    public static final DeferredBlock<CauldronBlock> MASTER_CHEFS_CAULDRON = BLOCKS.registerBlock("master_chefs_cauldron",
+            CauldronBlock::new,
             BlockBehaviour.Properties.of()
                     .mapColor(MapColor.GOLD)
                     .strength(2.0F, 6.0F)

@@ -33,6 +33,8 @@ public class ModTabs {
                         output.accept(ModItems.NOVA_TEMPLATE.get());
                         output.accept(ModItems.UNCOMPLETED_NOVA_COIN.get());
                         output.accept(ModItems.NOVA_COIN.get());
+                        output.accept(ModItems.CAKE_BASE.get());
+                        output.accept(ModItems.NEBULA_BATTER.get());
                         output.accept(ModItems.CAKE_OF_NEBULAE.get());
                         output.accept(ModItems.CHEFS_HAT.get());
                         output.accept(ModItems.STARGLASS.get());

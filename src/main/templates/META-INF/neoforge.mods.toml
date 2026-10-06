@@ -31,3 +31,10 @@ A progression chain for a Create server: Experience Catalyst, Nova Coin, Quantum
     versionRange="[6.0,)"
     ordering="AFTER"
     side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="farmersdelight"
+    type="required"
+    versionRange="[1.3,)"
+    ordering="AFTER"
+    side="BOTH"
