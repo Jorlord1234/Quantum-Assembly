@@ -28,7 +28,7 @@ public class KitBlockEntity extends BlockEntity {
     private static final String[] KEYS = {"catalyst", "coin", "totem"};
 
     private final NonNullList<ItemStack> items = NonNullList.withSize(3, ItemStack.EMPTY);
-    public static final int STORAGE_SLOTS = 36;
+    public static final int STORAGE_SLOTS = 54;
     private int progress = 0;
 
     /** The 3 ritual slots, as an item handler so the menu can show them. */

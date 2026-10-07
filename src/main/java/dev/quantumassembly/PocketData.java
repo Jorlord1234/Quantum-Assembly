@@ -11,7 +11,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.saveddata.SavedData;
 
-/** Remembers every player's personal pocket space. */
+/** Remembers every owner's pocket space, and where every visitor has to go back to. */
 public class PocketData extends SavedData {
     private static final String NAME = "quantum_assembly_pockets";
 
@@ -19,14 +19,18 @@ public class PocketData extends SavedData {
         public int index;
         public int level;
         public boolean built;
-        public String returnDim = "";
-        public double rx;
-        public double ry;
-        public double rz;
+    }
+
+    public static class Return {
+        public String dim = "";
+        public double x;
+        public double y;
+        public double z;
         public float yaw;
     }
 
     private final Map<UUID, Plot> plots = new HashMap<>();
+    private final Map<UUID, Return> returns = new HashMap<>();
     private int next = 0;
 
     public static PocketData get(MinecraftServer server) {
@@ -47,25 +51,41 @@ public class PocketData extends SavedData {
         return plots.get(id);
     }
 
+    public void setReturn(UUID visitor, Return value) {
+        returns.put(visitor, value);
+        setDirty();
+    }
+
+    public Return getReturn(UUID visitor) {
+        return returns.get(visitor);
+    }
+
     @Override
     public CompoundTag save(CompoundTag tag, HolderLookup.Provider registries) {
         tag.putInt("next", next);
         ListTag list = new ListTag();
         for (Map.Entry<UUID, Plot> entry : plots.entrySet()) {
-            Plot p = entry.getValue();
             CompoundTag t = new CompoundTag();
             t.putUUID("owner", entry.getKey());
-            t.putInt("index", p.index);
-            t.putInt("level", p.level);
-            t.putBoolean("built", p.built);
-            t.putString("dim", p.returnDim);
-            t.putDouble("rx", p.rx);
-            t.putDouble("ry", p.ry);
-            t.putDouble("rz", p.rz);
-            t.putFloat("yaw", p.yaw);
+            t.putInt("index", entry.getValue().index);
+            t.putInt("level", entry.getValue().level);
+            t.putBoolean("built", entry.getValue().built);
             list.add(t);
         }
         tag.put("plots", list);
+        ListTag rets = new ListTag();
+        for (Map.Entry<UUID, Return> entry : returns.entrySet()) {
+            CompoundTag t = new CompoundTag();
+            Return r = entry.getValue();
+            t.putUUID("who", entry.getKey());
+            t.putString("dim", r.dim);
+            t.putDouble("x", r.x);
+            t.putDouble("y", r.y);
+            t.putDouble("z", r.z);
+            t.putFloat("yaw", r.yaw);
+            rets.add(t);
+        }
+        tag.put("returns", rets);
         return tag;
     }
 
@@ -79,12 +99,18 @@ public class PocketData extends SavedData {
             p.index = t.getInt("index");
             p.level = t.getInt("level");
             p.built = t.getBoolean("built");
-            p.returnDim = t.getString("dim");
-            p.rx = t.getDouble("rx");
-            p.ry = t.getDouble("ry");
-            p.rz = t.getDouble("rz");
-            p.yaw = t.getFloat("yaw");
             data.plots.put(t.getUUID("owner"), p);
+        }
+        ListTag rets = tag.getList("returns", Tag.TAG_COMPOUND);
+        for (int i = 0; i < rets.size(); i++) {
+            CompoundTag t = rets.getCompound(i);
+            Return r = new Return();
+            r.dim = t.getString("dim");
+            r.x = t.getDouble("x");
+            r.y = t.getDouble("y");
+            r.z = t.getDouble("z");
+            r.yaw = t.getFloat("yaw");
+            data.returns.put(t.getUUID("who"), r);
         }
         return data;
     }

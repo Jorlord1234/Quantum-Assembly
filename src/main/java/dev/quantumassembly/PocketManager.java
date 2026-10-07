@@ -1,5 +1,9 @@
 package dev.quantumassembly;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -32,7 +36,29 @@ public class PocketManager {
         return new BlockPos(plot.index * SPACING, FLOOR_Y, 0);
     }
 
-    public static void enter(ServerPlayer player) {
+    /** A player pressed "Link a Gate" and now has 30 seconds to right-click a Gate. */
+    public record Pending(String dim, BlockPos pos, long expires) {
+    }
+
+    private static final Map<UUID, Pending> PENDING = new HashMap<>();
+
+    public static void startLink(ServerPlayer player, BlockPos controlsPos) {
+        PENDING.put(player.getUUID(), new Pending(player.level().dimension().location().toString(), controlsPos,
+                player.level().getGameTime() + 600));
+        player.displayClientMessage(Component.translatable("message.quantum_assembly.link_armed"), true);
+    }
+
+    /** Returns the waiting link request (and removes it), or null. */
+    public static Pending takePending(ServerPlayer player) {
+        Pending p = PENDING.remove(player.getUUID());
+        if (p == null || p.expires() < player.level().getGameTime()) {
+            return null;
+        }
+        return p;
+    }
+
+    /** Go into the pocket space that belongs to "owner". */
+    public static void enter(ServerPlayer player, UUID owner) {
         MinecraftServer server = player.getServer();
         ServerLevel pocket = server.getLevel(POCKET);
         if (pocket == null) {
@@ -40,16 +66,18 @@ public class PocketManager {
             return;
         }
         PocketData data = PocketData.get(server);
-        PocketData.Plot plot = data.plot(player.getUUID());
+        PocketData.Plot plot = data.plot(owner);
         if (!plot.built) {
             build(pocket, plot, -1);
             plot.built = true;
         }
-        plot.returnDim = player.level().dimension().location().toString();
-        plot.rx = player.getX();
-        plot.ry = player.getY();
-        plot.rz = player.getZ();
-        plot.yaw = player.getYRot();
+        PocketData.Return back = new PocketData.Return();
+        back.dim = player.level().dimension().location().toString();
+        back.x = player.getX();
+        back.y = player.getY();
+        back.z = player.getZ();
+        back.yaw = player.getYRot();
+        data.setReturn(player.getUUID(), back);
         data.setDirty();
         BlockPos c = center(plot);
         player.teleportTo(pocket, c.getX() + 0.5, FLOOR_Y + 1.0, c.getZ() + 0.5, 0.0F, 0.0F);
@@ -57,19 +85,18 @@ public class PocketManager {
 
     public static void leave(ServerPlayer player) {
         MinecraftServer server = player.getServer();
-        PocketData data = PocketData.get(server);
-        PocketData.Plot plot = data.existing(player.getUUID());
+        PocketData.Return back = PocketData.get(server).getReturn(player.getUUID());
         ServerLevel dest = null;
-        if (plot != null && !plot.returnDim.isEmpty()) {
-            dest = server.getLevel(ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(plot.returnDim)));
+        if (back != null && !back.dim.isEmpty()) {
+            dest = server.getLevel(ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(back.dim)));
         }
-        if (dest == null || plot == null) {
+        if (dest == null) {
             ServerLevel overworld = server.overworld();
             BlockPos spawn = overworld.getSharedSpawnPos();
             player.teleportTo(overworld, spawn.getX() + 0.5, spawn.getY() + 1.0, spawn.getZ() + 0.5, 0.0F, 0.0F);
             return;
         }
-        player.teleportTo(dest, plot.rx, plot.ry, plot.rz, plot.yaw, 0.0F);
+        player.teleportTo(dest, back.x, back.y, back.z, back.yaw, 0.0F);
     }
 
     /** Spend Starglass to make your space bigger. */
@@ -152,15 +179,10 @@ public class PocketManager {
         }
     }
 
-    /** Brings a player who fell off the edge back to their space. */
+    /** Brings a player who fell off the edge back to the middle of the space they are in. */
     public static void rescue(ServerPlayer player) {
-        PocketData.Plot plot = PocketData.get(player.getServer()).existing(player.getUUID());
-        if (plot == null) {
-            leave(player);
-            return;
-        }
-        BlockPos c = center(plot);
-        player.teleportTo(player.serverLevel(), c.getX() + 0.5, FLOOR_Y + 1.0, c.getZ() + 0.5, player.getYRot(), 0.0F);
+        int index = Math.round((float) player.getX() / SPACING);
+        player.teleportTo(player.serverLevel(), index * SPACING + 0.5, FLOOR_Y + 1.0, 0.5, player.getYRot(), 0.0F);
         player.fallDistance = 0.0F;
     }
 }

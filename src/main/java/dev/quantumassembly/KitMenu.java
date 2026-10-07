@@ -26,21 +26,22 @@ public class KitMenu extends AbstractContainerMenu {
             throw new IllegalStateException("The Quantum Assembly Kit is missing");
         }
         this.kit = kit;
+        // The 3 ritual slots sit in a column on the left, like upgrade tabs.
         for (int i = 0; i < RITUAL; i++) {
-            addSlot(new SlotItemHandler(kit.getRitual(), i, 62 + i * 18, 18));
+            addSlot(new SlotItemHandler(kit.getRitual(), i, 10, 24 + i * 28));
         }
-        for (int row = 0; row < 4; row++) {
+        for (int row = 0; row < 6; row++) {
             for (int col = 0; col < 9; col++) {
-                addSlot(new SlotItemHandler(kit.getStorage(), col + row * 9, 8 + col * 18, 40 + row * 18));
+                addSlot(new SlotItemHandler(kit.getStorage(), col + row * 9, 40 + col * 18, 20 + row * 18));
             }
         }
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 9; col++) {
-                addSlot(new Slot(inventory, col + row * 9 + 9, 8 + col * 18, 125 + row * 18));
+                addSlot(new Slot(inventory, col + row * 9 + 9, 40 + col * 18, 148 + row * 18));
             }
         }
         for (int col = 0; col < 9; col++) {
-            addSlot(new Slot(inventory, col, 8 + col * 18, 183));
+            addSlot(new Slot(inventory, col, 40 + col * 18, 206));
         }
     }
 

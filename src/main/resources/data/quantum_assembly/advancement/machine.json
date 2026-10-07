@@ -1,0 +1,30 @@
+{
+  "parent": "quantum_assembly:kit",
+  "display": {
+    "icon": {
+      "id": "quantum_assembly:pocket_core"
+    },
+    "title": {
+      "translate": "advancement.quantum_assembly.machine.title"
+    },
+    "description": {
+      "translate": "advancement.quantum_assembly.machine.desc"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "get": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "quantum_assembly:pocket_core"
+          }
+        ]
+      }
+    }
+  }
+}

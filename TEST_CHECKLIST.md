@@ -48,3 +48,15 @@ Note: the Nebula burner no longer heats Basins (only for the ritual), as the des
 32. [ ] There is a Gate behind you: right-click it to come back
 33. [ ] You cannot walk off the edge (invisible walls). Digging down is not possible (floor can be broken, void under it)
 34. [ ] Right-click a Gate with 8 Starglass: your space gets bigger
+
+# Extra tests for 0.12
+35. [ ] Cauldron: right-click opens the cooking screen and it STAYS open
+36. [ ] Kit: the screen looks like a backpack, with a straight grid
+37. [ ] Craft Pocket Casing (4), Controls, Core
+38. [ ] Build the 3x3x3 cube. Right-click the Controls: "The machine is assembled"
+39. [ ] You cannot break any of the 27 blocks while it is assembled
+40. [ ] Open the Controls: you see the level and 3 buttons
+41. [ ] Press "Link a Gate", then right-click a Quantum Gate: "now linked"
+42. [ ] Right-click the linked Gate: you arrive in the pocket. The gate there brings you back
+43. [ ] Press "Upgrade" with enough Starglass: the space gets bigger
+44. [ ] Press "Take the machine apart", then mine a block with a diamond pickaxe

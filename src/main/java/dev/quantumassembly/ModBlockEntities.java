@@ -12,4 +12,12 @@ public class ModBlockEntities {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<KitBlockEntity>> KIT =
             BLOCK_ENTITIES.register("quantum_assembly_kit",
                     () -> BlockEntityType.Builder.of(KitBlockEntity::new, ModBlocks.QUANTUM_ASSEMBLY_KIT.get()).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<PocketControlsBlockEntity>> CONTROLS =
+            BLOCK_ENTITIES.register("pocket_controls",
+                    () -> BlockEntityType.Builder.of(PocketControlsBlockEntity::new, ModBlocks.POCKET_CONTROLS.get()).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<GateBlockEntity>> GATE =
+            BLOCK_ENTITIES.register("quantum_gate",
+                    () -> BlockEntityType.Builder.of(GateBlockEntity::new, ModBlocks.QUANTUM_GATE.get()).build(null));
 }

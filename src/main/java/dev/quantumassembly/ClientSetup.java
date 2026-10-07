@@ -28,6 +28,7 @@ public class ClientSetup {
     @SubscribeEvent
     public static void registerScreens(RegisterMenuScreensEvent event) {
         event.register(ModMenus.KIT.get(), KitScreen::new);
+        event.register(ModMenus.CONTROLS.get(), PocketControlsScreen::new);
     }
 
     @SubscribeEvent

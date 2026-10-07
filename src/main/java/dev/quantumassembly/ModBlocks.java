@@ -32,6 +32,20 @@ public class ModBlocks {
                     .lightLevel(state -> 10)
                     .noOcclusion());
 
+    private static BlockBehaviour.Properties partProps() {
+        return BlockBehaviour.Properties.of()
+                .mapColor(MapColor.COLOR_BLACK)
+                .strength(5.0F, 1200.0F)
+                .requiresCorrectToolForDrops()
+                .sound(SoundType.NETHERITE_BLOCK)
+                .pushReaction(net.minecraft.world.level.material.PushReaction.BLOCK)
+                .lightLevel(state -> state.getValue(Multiblock.ASSEMBLED) ? 6 : 0);
+    }
+
+    public static final DeferredBlock<PocketCasingBlock> POCKET_CASING = BLOCKS.registerBlock("pocket_casing", PocketCasingBlock::new, partProps());
+    public static final DeferredBlock<PocketCoreBlock> POCKET_CORE = BLOCKS.registerBlock("pocket_core", PocketCoreBlock::new, partProps());
+    public static final DeferredBlock<PocketControlsBlock> POCKET_CONTROLS = BLOCKS.registerBlock("pocket_controls", PocketControlsBlock::new, partProps());
+
     public static final DeferredBlock<Block> STARGLASS_ORE = BLOCKS.registerSimpleBlock("starglass_ore",
             BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_CYAN)

@@ -31,6 +31,10 @@ public class ModItems {
     public static final DeferredItem<ChefsHatItem> CHEFS_HAT = ITEMS.registerItem(
             "chefs_hat", ChefsHatItem::new, new Item.Properties());
 
+    public static final DeferredItem<BlockItem> POCKET_CASING = ITEMS.registerSimpleBlockItem("pocket_casing", ModBlocks.POCKET_CASING);
+    public static final DeferredItem<BlockItem> POCKET_CORE = ITEMS.registerSimpleBlockItem("pocket_core", ModBlocks.POCKET_CORE);
+    public static final DeferredItem<BlockItem> POCKET_CONTROLS = ITEMS.registerSimpleBlockItem("pocket_controls", ModBlocks.POCKET_CONTROLS);
+
     public static final DeferredItem<BlockItem> STARGLASS_ORE = ITEMS.registerSimpleBlockItem(
             "starglass_ore", ModBlocks.STARGLASS_ORE);
     public static final DeferredItem<BlockItem> NEBULA_BLAZE_BURNER = ITEMS.registerSimpleBlockItem(

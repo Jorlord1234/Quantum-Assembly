@@ -11,4 +11,7 @@ public class ModMenus {
 
     public static final DeferredHolder<MenuType<?>, MenuType<KitMenu>> KIT =
             MENUS.register("kit", () -> IMenuTypeExtension.create(KitMenu::new));
+
+    public static final DeferredHolder<MenuType<?>, MenuType<PocketControlsMenu>> CONTROLS =
+            MENUS.register("pocket_controls", () -> IMenuTypeExtension.create(PocketControlsMenu::new));
 }

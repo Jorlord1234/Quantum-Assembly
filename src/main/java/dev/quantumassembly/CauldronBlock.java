@@ -3,7 +3,8 @@ package dev.quantumassembly;
 import java.lang.reflect.Field;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
@@ -45,21 +46,32 @@ public class CauldronBlock extends CookingPotBlock {
         return new ItemStack(ModItems.MASTER_CHEFS_CAULDRON.get());
     }
 
-    /** Opens the pot screen with our own menu, because the normal one closes at once on a different block. */
+    /** Same as Farmer's Delight, but opens our own menu (the normal one closes at once on a different block). */
     @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
+    public ItemInteractionResult useItemOn(ItemStack heldStack, BlockState state, Level level, BlockPos pos, Player player,
+                                           InteractionHand hand, BlockHitResult result) {
+        if (heldStack.isEmpty() && player.isShiftKeyDown()) {
+            return super.useItemOn(heldStack, state, level, pos, player, hand, result); // flips the support, like a normal pot
+        }
         if (!level.isClientSide) {
             BlockEntity be = level.getBlockEntity(pos);
             if (be instanceof CookingPotBlockEntity pot) {
-                ContainerData data = dataOf(pot);
-                if (data != null) {
-                    player.openMenu(new SimpleMenuProvider(
-                            (id, inventory, p) -> new CauldronMenu(id, inventory, pot, data),
-                            pot.getDisplayName()), pos);
+                ItemStack serving = pot.useHeldItemOnMeal(heldStack);
+                if (serving != ItemStack.EMPTY) {
+                    if (!player.getInventory().add(serving)) {
+                        player.drop(serving, false);
+                    }
+                } else {
+                    ContainerData data = dataOf(pot);
+                    if (data != null) {
+                        player.openMenu(new SimpleMenuProvider(
+                                (id, inventory, p) -> new CauldronMenu(id, inventory, pot, data),
+                                pot.getDisplayName()), pos);
+                    }
                 }
             }
         }
-        return InteractionResult.SUCCESS;
+        return ItemInteractionResult.SUCCESS;
     }
 
     private static ContainerData dataOf(CookingPotBlockEntity pot) {
