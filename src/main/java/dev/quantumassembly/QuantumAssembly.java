@@ -24,6 +24,7 @@ public class QuantumAssembly {
         ModBlocks.BLOCKS.register(modEventBus);
         ModBlockEntities.BLOCK_ENTITIES.register(modEventBus);
         ModArmorMaterials.MATERIALS.register(modEventBus);
+        ModMenus.MENUS.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
         ModDataComponents.COMPONENTS.register(modEventBus);
         ModTabs.TABS.register(modEventBus);

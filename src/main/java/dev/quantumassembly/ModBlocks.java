@@ -21,6 +21,17 @@ public class ModBlocks {
             Block.box(0, 4, 6, 2, 7, 10),
             Block.box(14, 4, 6, 16, 7, 10));
 
+    private static final VoxelShape GATE_SHAPE = Block.box(0, 0, 6, 16, 16, 10);
+
+    public static final DeferredBlock<QuantumGateBlock> QUANTUM_GATE = BLOCKS.registerBlock("quantum_gate",
+            props -> new QuantumGateBlock(props, GATE_SHAPE),
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_PURPLE)
+                    .strength(3.0F, 8.0F)
+                    .sound(SoundType.NETHERITE_BLOCK)
+                    .lightLevel(state -> 10)
+                    .noOcclusion());
+
     public static final DeferredBlock<Block> STARGLASS_ORE = BLOCKS.registerSimpleBlock("starglass_ore",
             BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_CYAN)

@@ -36,8 +36,7 @@ public class ModItems {
     public static final DeferredItem<BlockItem> NEBULA_BLAZE_BURNER = ITEMS.registerSimpleBlockItem(
             "nebula_blaze_burner", ModBlocks.NEBULA_BLAZE_BURNER);
     /** Placeholder result of the ritual until the real Quantum Gate is designed. */
-    public static final DeferredItem<Item> QUANTUM_GATE = ITEMS.registerSimpleItem("quantum_gate",
-            new Item.Properties().rarity(Rarity.EPIC).stacksTo(1));
+    public static final DeferredItem<BlockItem> QUANTUM_GATE = ITEMS.registerSimpleBlockItem("quantum_gate", ModBlocks.QUANTUM_GATE, new Item.Properties().rarity(Rarity.EPIC));
     public static final DeferredItem<BlockItem> QUANTUM_ASSEMBLY_KIT = ITEMS.registerSimpleBlockItem(
             "quantum_assembly_kit", ModBlocks.QUANTUM_ASSEMBLY_KIT);
     public static final DeferredItem<BlockItem> MASTER_CHEFS_CAULDRON = ITEMS.register(

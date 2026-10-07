@@ -5,6 +5,8 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -16,6 +18,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.items.ItemStackHandler;
 
 /** The Quantum Assembly Kit: 3 slots (Catalyst, Nova Coin, Totem) and the ritual on a lit Nebula Blaze Burner. */
 public class KitBlockEntity extends BlockEntity {
@@ -25,7 +28,65 @@ public class KitBlockEntity extends BlockEntity {
     private static final String[] KEYS = {"catalyst", "coin", "totem"};
 
     private final NonNullList<ItemStack> items = NonNullList.withSize(3, ItemStack.EMPTY);
+    public static final int STORAGE_SLOTS = 36;
     private int progress = 0;
+
+    /** The 3 ritual slots, as an item handler so the menu can show them. */
+    private final ItemStackHandler ritual = new ItemStackHandler(items) {
+        @Override
+        public int getSlotLimit(int slot) {
+            return 1;
+        }
+
+        @Override
+        public boolean isItemValid(int slot, ItemStack stack) {
+            return slotFor(stack) == slot && (slot != CATALYST || catalystFull(stack));
+        }
+
+        @Override
+        protected void onContentsChanged(int slot) {
+            changed();
+        }
+    };
+
+    /** The big storage: more room than a Toolbox and stacks bigger than 64. */
+    private final ItemStackHandler storage = new ItemStackHandler(STORAGE_SLOTS) {
+        @Override
+        public int getSlotLimit(int slot) {
+            return Config.kitStackLimit();
+        }
+
+        @Override
+        protected int getStackLimit(int slot, ItemStack stack) {
+            return getSlotLimit(slot);
+        }
+
+        @Override
+        protected void onContentsChanged(int slot) {
+            setChanged();
+        }
+    };
+
+    public ItemStackHandler getRitual() {
+        return ritual;
+    }
+
+    public ItemStackHandler getStorage() {
+        return storage;
+    }
+
+    /** Drops everything in the storage (used when the Kit is broken). */
+    public void dropStorage(Level level, BlockPos pos) {
+        for (int i = 0; i < storage.getSlots(); i++) {
+            ItemStack stack = storage.getStackInSlot(i);
+            while (!stack.isEmpty()) {
+                int part = Math.min(stack.getCount(), Math.max(1, stack.getMaxStackSize()));
+                Containers.dropItemStack(level, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack.copyWithCount(part));
+                stack.shrink(part);
+            }
+            storage.setStackInSlot(i, ItemStack.EMPTY);
+        }
+    }
 
     public KitBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.KIT.get(), pos, state);
@@ -162,6 +223,19 @@ public class KitBlockEntity extends BlockEntity {
             tag.put(KEYS[i], items.get(i).saveOptional(registries));
         }
         tag.putInt("progress", progress);
+        // Stacks can be bigger than 99, so each stack is saved as "one item + a number".
+        ListTag list = new ListTag();
+        for (int i = 0; i < storage.getSlots(); i++) {
+            ItemStack stack = storage.getStackInSlot(i);
+            if (!stack.isEmpty()) {
+                CompoundTag entry = new CompoundTag();
+                entry.putInt("slot", i);
+                entry.putInt("n", stack.getCount());
+                entry.put("item", stack.copyWithCount(1).save(registries));
+                list.add(entry);
+            }
+        }
+        tag.put("storage", list);
     }
 
     @Override
@@ -171,5 +245,20 @@ public class KitBlockEntity extends BlockEntity {
             items.set(i, ItemStack.parseOptional(registries, tag.getCompound(KEYS[i])));
         }
         progress = tag.getInt("progress");
+        for (int i = 0; i < storage.getSlots(); i++) {
+            storage.setStackInSlot(i, ItemStack.EMPTY);
+        }
+        ListTag list = tag.getList("storage", Tag.TAG_COMPOUND);
+        for (int i = 0; i < list.size(); i++) {
+            CompoundTag entry = list.getCompound(i);
+            int slot = entry.getInt("slot");
+            if (slot >= 0 && slot < storage.getSlots()) {
+                ItemStack stack = ItemStack.parse(registries, entry.get("item")).orElse(ItemStack.EMPTY);
+                if (!stack.isEmpty()) {
+                    stack.setCount(Math.max(1, entry.getInt("n")));
+                    storage.setStackInSlot(slot, stack);
+                }
+            }
+        }
     }
 }

@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -62,7 +63,9 @@ public class KitBlock extends FacingShapedBlock implements EntityBlock {
                 kit.giveBack(player);
                 player.displayClientMessage(Component.literal("Items returned. " + kit.describe()), true);
             } else {
-                player.displayClientMessage(Component.literal(kit.describe()), true);
+                player.openMenu(new SimpleMenuProvider(
+                        (id, inventory, p) -> new KitMenu(id, inventory, kit),
+                        Component.translatable("block.quantum_assembly.quantum_assembly_kit")), pos);
             }
         }
         return InteractionResult.SUCCESS;
@@ -72,6 +75,7 @@ public class KitBlock extends FacingShapedBlock implements EntityBlock {
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
         if (!state.is(newState.getBlock()) && level.getBlockEntity(pos) instanceof KitBlockEntity kit) {
             kit.dropAll(level, pos);
+            kit.dropStorage(level, pos);
         }
         super.onRemove(state, level, pos, newState, movedByPiston);
     }

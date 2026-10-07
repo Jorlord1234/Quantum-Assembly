@@ -35,3 +35,16 @@ Note: the Nebula burner no longer heats Basins (only for the ritual), as the des
 21. [ ] Place the Cauldron. Put it over a heat source. It opens the cooking pot screen
 22. [ ] Make Cake Base (press), Nebula Batter (spout) and cook the Cake in the Cauldron
 23. [ ] The advancements tab "Quantum Assembly" shows up
+
+# Extra tests for 0.11
+24. [ ] Right-click the Cauldron: the cooking pot screen stays open. Pick-block shows the golden Cauldron
+25. [ ] The Nebula burner has the see-through cage and the purple blaze. Normal Create burners look normal
+26. [ ] Kit: handle is small, gem on the lid is in the middle
+27. [ ] Right-click the Kit (no item in hand): a screen with 3 ritual slots and storage opens
+28. [ ] Put 100+ of one item in a Kit slot. It keeps the full number after you close and reopen it
+29. [ ] Break the Kit: everything drops
+30. [ ] Chef's Hat: long middle, small puff on top
+31. [ ] Place a Quantum Gate and right-click it: you arrive on a floor in the pocket dimension
+32. [ ] There is a Gate behind you: right-click it to come back
+33. [ ] You cannot walk off the edge (invisible walls). Digging down is not possible (floor can be broken, void under it)
+34. [ ] Right-click a Gate with 8 Starglass: your space gets bigger

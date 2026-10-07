@@ -22,6 +22,10 @@ public class Config {
             .comment("How long the Quantum Assembly Kit ritual takes (seconds).")
             .defineInRange("ritualSeconds", 10, 1, 600);
 
+    public static final ModConfigSpec.IntValue KIT_STACK_LIMIT = BUILDER
+            .comment("How many items fit in one slot of the Quantum Assembly Kit (normal Minecraft is 64).")
+            .defineInRange("kitStackLimit", 256, 64, 999);
+
     static final ModConfigSpec SPEC = BUILDER.build();
 
     public static String masterChefAdvancement() {
@@ -54,6 +58,14 @@ public class Config {
             return CATALYST_CAPACITY_BUCKETS.get() * 1000;
         } catch (IllegalStateException notLoadedYet) {
             return 999 * 1000;
+        }
+    }
+
+    public static int kitStackLimit() {
+        try {
+            return KIT_STACK_LIMIT.get();
+        } catch (IllegalStateException notLoadedYet) {
+            return 256;
         }
     }
 }
