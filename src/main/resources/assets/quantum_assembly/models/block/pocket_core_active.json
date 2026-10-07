@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "quantum_assembly:block/pocket_core_active"
+  }
+}

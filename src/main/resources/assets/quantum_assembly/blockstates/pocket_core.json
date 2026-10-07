@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "assembled=false": {
+      "model": "quantum_assembly:block/pocket_core"
+    },
+    "assembled=true": {
+      "model": "quantum_assembly:block/pocket_core_active"
+    }
+  }
+}
