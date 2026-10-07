@@ -60,3 +60,16 @@ Note: the Nebula burner no longer heats Basins (only for the ritual), as the des
 42. [ ] Right-click the linked Gate: you arrive in the pocket. The gate there brings you back
 43. [ ] Press "Upgrade" with enough Starglass: the space gets bigger
 44. [ ] Press "Take the machine apart", then mine a block with a diamond pickaxe
+
+# Extra tests for 0.13
+43. [ ] Nebula burner looks like a normal Create Blaze Burner but purple (cold item and block, then lit)
+44. [ ] A NORMAL Create Blaze Burner still looks normal (orange / blue), also after placing a Nebula burner next to it
+45. [ ] Smithing table: Nova Template + Blaze Burner + Quantum Assembly Kit = Nebula Blaze Burner
+46. [ ] Right-click the burner with a full Catalyst, a Nova Coin, a Totem: action bar shows [x] for each
+47. [ ] Not-full Catalyst is refused. Empty hand shows the status. Shift + empty hand gives the items back
+48. [ ] Cake of Nebulae lights the burner. With all 3 items it runs the ritual and drops a Quantum Gate item, then goes cold
+49. [ ] Break the burner with items inside: they drop
+50. [ ] Kit opens a plain 9 x 6 storage grid (no ritual tabs). Stacks up to 256 still work
+51. [ ] Pocket Controls screen: two upgrade cards with pips, locked Kinetic card, Link and Take apart buttons
+52. [ ] Upgrade Pocket space and Guests: Starglass is taken, pips fill, button greys out at the maximum
+53. [ ] Guests: with level 0, a second guest cannot enter while one guest is inside (message). Level 1 lets two in

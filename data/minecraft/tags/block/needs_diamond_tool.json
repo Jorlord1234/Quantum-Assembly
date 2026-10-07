@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "quantum_assembly:starglass_ore",
+    "quantum_assembly:pocket_casing",
+    "quantum_assembly:pocket_core",
+    "quantum_assembly:pocket_controls"
+  ]
+}

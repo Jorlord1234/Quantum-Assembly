@@ -1,0 +1,19 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "item": "create:powdered_obsidian"
+    },
+    {
+      "item": "minecraft:echo_shard"
+    },
+    {
+      "item": "create_enchantment_industry:super_experience_nugget"
+    }
+  ],
+  "results": [
+    {
+      "id": "quantum_assembly:cake_base"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "parent": "quantum_assembly:gate",
+  "display": {
+    "icon": {
+      "id": "quantum_assembly:starglass"
+    },
+    "title": {
+      "translate": "advancement.quantum_assembly.pocket.title"
+    },
+    "description": {
+      "translate": "advancement.quantum_assembly.pocket.desc"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "in": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "quantum_assembly:pocket"
+      }
+    }
+  }
+}

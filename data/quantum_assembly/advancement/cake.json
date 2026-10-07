@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "id": "quantum_assembly:cake_of_nebulae"
+    },
+    "title": {
+      "translate": "advancement.quantum_assembly.cake.title"
+    },
+    "description": {
+      "translate": "advancement.quantum_assembly.cake.desc"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "get": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "quantum_assembly:cake_of_nebulae"
+          }
+        ]
+      }
+    }
+  },
+  "parent": "quantum_assembly:root"
+}

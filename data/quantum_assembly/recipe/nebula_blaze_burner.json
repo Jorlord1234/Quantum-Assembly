@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": {
+    "item": "quantum_assembly:nova_template"
+  },
+  "base": {
+    "item": "create:blaze_burner"
+  },
+  "addition": {
+    "item": "quantum_assembly:quantum_assembly_kit"
+  },
+  "result": {
+    "id": "quantum_assembly:nebula_blaze_burner",
+    "count": 1
+  }
+}

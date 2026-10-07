@@ -1,0 +1,18 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "quantum_assembly:cake_base"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "create_dragons_plus:dragon_breath"
+    }
+  ],
+  "results": [
+    {
+      "id": "quantum_assembly:nebula_batter"
+    }
+  ]
+}

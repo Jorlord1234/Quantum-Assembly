@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "id": "quantum_assembly:nova_coin"
+    },
+    "title": {
+      "translate": "advancement.quantum_assembly.nova_coin.title"
+    },
+    "description": {
+      "translate": "advancement.quantum_assembly.nova_coin.desc"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "get": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "quantum_assembly:nova_coin"
+          }
+        ]
+      }
+    }
+  },
+  "parent": "quantum_assembly:half_a_coin"
+}

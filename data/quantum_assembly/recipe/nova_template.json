@@ -1,0 +1,23 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:netherite_upgrade_smithing_template"
+    },
+    {
+      "item": "create_enchantment_industry:super_enchanting_template"
+    },
+    {
+      "item": "create_dragons_plus:blaze_upgrade_smithing_template"
+    },
+    {
+      "item": "minecraft:netherite_ingot"
+    }
+  ],
+  "results": [
+    {
+      "id": "quantum_assembly:nova_template",
+      "count": 1
+    }
+  ]
+}

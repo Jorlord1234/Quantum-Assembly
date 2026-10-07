@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "quantum_assembly:starglass_ore",
+    "quantum_assembly:quantum_assembly_kit",
+    "quantum_assembly:master_chefs_cauldron",
+    "quantum_assembly:nebula_blaze_burner",
+    "quantum_assembly:quantum_gate",
+    "quantum_assembly:pocket_casing",
+    "quantum_assembly:pocket_core",
+    "quantum_assembly:pocket_controls"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "type": "farmersdelight:cooking",
+  "experience": 1.0,
+  "cookingtime": 600,
+  "ingredients": [
+    {
+      "item": "quantum_assembly:nebula_batter"
+    }
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "count": 1,
+    "id": "quantum_assembly:cake_of_nebulae"
+  }
+}
