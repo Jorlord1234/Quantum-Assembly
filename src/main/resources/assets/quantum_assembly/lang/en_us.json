@@ -39,5 +39,12 @@
   "item.quantum_assembly.super_experience_charge": "Super Experience Charge (helper item)",
   "message.quantum_assembly.catalyst_empty": "The Catalyst needs at least 1 bucket of experience",
   "message.quantum_assembly.burner_full": "The burner cannot take more super experience",
-  "message.quantum_assembly.burner_charged": "Super experience added to the burner"
+  "message.quantum_assembly.burner_charged": "Super experience added to the burner",
+  "block.quantum_assembly.quantum_gate": "Quantum Gate",
+  "message.quantum_assembly.no_pocket": "The pocket dimension is not available in this world",
+  "message.quantum_assembly.max_level": "Your pocket space is as big as it can get",
+  "message.quantum_assembly.need_starglass": "You need %s Starglass to upgrade (you have %s)",
+  "message.quantum_assembly.upgraded": "Pocket space upgraded to level %s (%s blocks wide)",
+  "advancement.quantum_assembly.pocket.title": "A Pocket Full of Stars",
+  "advancement.quantum_assembly.pocket.desc": "Step through a Quantum Gate into your own pocket space"
 }

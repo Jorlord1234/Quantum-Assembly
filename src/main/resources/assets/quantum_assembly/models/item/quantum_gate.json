@@ -1,6 +1,3 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "quantum_assembly:item/quantum_gate"
-  }
+  "parent": "quantum_assembly:block/quantum_gate"
 }

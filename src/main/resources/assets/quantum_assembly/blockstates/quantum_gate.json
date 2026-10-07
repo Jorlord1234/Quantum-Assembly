@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "quantum_assembly:block/quantum_gate"
+    },
+    "facing=east": {
+      "model": "quantum_assembly:block/quantum_gate",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "quantum_assembly:block/quantum_gate",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "quantum_assembly:block/quantum_gate",
+      "y": 270
+    }
+  }
+}
