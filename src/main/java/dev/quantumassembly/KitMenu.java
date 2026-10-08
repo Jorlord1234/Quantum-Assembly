@@ -7,12 +7,30 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
 /** The screen of the Quantum Assembly Kit: a 9 x 6 grid of big storage slots, your inventory below. */
 public class KitMenu extends AbstractContainerMenu {
     private static final int STORAGE = KitBlockEntity.STORAGE_SLOTS;
     private final KitBlockEntity kit;
+
+    /** A storage slot that really holds big stacks (the normal item-handler slot never goes past 64). */
+    private static class BigSlot extends SlotItemHandler {
+        BigSlot(IItemHandler handler, int index, int x, int y) {
+            super(handler, index, x, y);
+        }
+
+        @Override
+        public int getMaxStackSize() {
+            return Config.kitStackLimit();
+        }
+
+        @Override
+        public int getMaxStackSize(ItemStack stack) {
+            return Config.kitStackLimit();
+        }
+    }
 
     /** Client side: the block position is sent by the server. */
     public KitMenu(int id, Inventory inventory, RegistryFriendlyByteBuf buf) {
@@ -27,7 +45,7 @@ public class KitMenu extends AbstractContainerMenu {
         this.kit = kit;
         for (int row = 0; row < 6; row++) {
             for (int col = 0; col < 9; col++) {
-                addSlot(new SlotItemHandler(kit.getStorage(), col + row * 9, 8 + col * 18, 18 + row * 18));
+                addSlot(new BigSlot(kit.getStorage(), col + row * 9, 8 + col * 18, 18 + row * 18));
             }
         }
         for (int row = 0; row < 3; row++) {
