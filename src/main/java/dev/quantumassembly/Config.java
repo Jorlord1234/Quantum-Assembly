@@ -19,7 +19,7 @@ public class Config {
             .defineInRange("nebulaBurnerLitSeconds", 300, 0, 86400);
 
     public static final ModConfigSpec.IntValue RITUAL_SECONDS = BUILDER
-            .comment("How long the Quantum Assembly Kit ritual takes (seconds).")
+            .comment("How long the Nebula Blaze Burner ritual takes (seconds).")
             .defineInRange("ritualSeconds", 10, 1, 600);
 
     public static final ModConfigSpec.IntValue KIT_STACK_LIMIT = BUILDER

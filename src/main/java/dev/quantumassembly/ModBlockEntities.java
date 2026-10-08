@@ -20,4 +20,8 @@ public class ModBlockEntities {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<GateBlockEntity>> GATE =
             BLOCK_ENTITIES.register("quantum_gate",
                     () -> BlockEntityType.Builder.of(GateBlockEntity::new, ModBlocks.QUANTUM_GATE.get()).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<NebulaBurnerBlockEntity>> NEBULA_BURNER =
+            BLOCK_ENTITIES.register("nebula_blaze_burner",
+                    () -> BlockEntityType.Builder.of(NebulaBurnerBlockEntity::new, ModBlocks.NEBULA_BLAZE_BURNER.get()).build(null));
 }

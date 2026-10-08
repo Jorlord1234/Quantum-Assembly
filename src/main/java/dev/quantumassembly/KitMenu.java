@@ -9,9 +9,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
-/** The screen of the Quantum Assembly Kit: 3 ritual slots on top, then 36 big storage slots. */
+/** The screen of the Quantum Assembly Kit: a 9 x 6 grid of big storage slots, your inventory below. */
 public class KitMenu extends AbstractContainerMenu {
-    private static final int RITUAL = 3;
     private static final int STORAGE = KitBlockEntity.STORAGE_SLOTS;
     private final KitBlockEntity kit;
 
@@ -26,22 +25,18 @@ public class KitMenu extends AbstractContainerMenu {
             throw new IllegalStateException("The Quantum Assembly Kit is missing");
         }
         this.kit = kit;
-        // The 3 ritual slots sit in a column on the left, like upgrade tabs.
-        for (int i = 0; i < RITUAL; i++) {
-            addSlot(new SlotItemHandler(kit.getRitual(), i, 10, 24 + i * 28));
-        }
         for (int row = 0; row < 6; row++) {
             for (int col = 0; col < 9; col++) {
-                addSlot(new SlotItemHandler(kit.getStorage(), col + row * 9, 40 + col * 18, 20 + row * 18));
+                addSlot(new SlotItemHandler(kit.getStorage(), col + row * 9, 8 + col * 18, 18 + row * 18));
             }
         }
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 9; col++) {
-                addSlot(new Slot(inventory, col + row * 9 + 9, 40 + col * 18, 148 + row * 18));
+                addSlot(new Slot(inventory, col + row * 9 + 9, 8 + col * 18, 140 + row * 18));
             }
         }
         for (int col = 0; col < 9; col++) {
-            addSlot(new Slot(inventory, col, 40 + col * 18, 206));
+            addSlot(new Slot(inventory, col, 8 + col * 18, 198));
         }
     }
 
@@ -58,20 +53,12 @@ public class KitMenu extends AbstractContainerMenu {
         }
         ItemStack stack = slot.getItem();
         ItemStack copy = stack.copy();
-        int kitSlots = RITUAL + STORAGE;
-        if (index < kitSlots) {
-            if (!moveItemStackTo(stack, kitSlots, slots.size(), true)) {
+        if (index < STORAGE) {
+            if (!moveItemStackTo(stack, STORAGE, slots.size(), true)) {
                 return ItemStack.EMPTY;
             }
-        } else {
-            boolean moved = false;
-            int ritualSlot = KitBlockEntity.slotFor(stack);
-            if (ritualSlot >= 0 && slots.get(ritualSlot).mayPlace(stack)) {
-                moved = moveItemStackTo(stack, ritualSlot, ritualSlot + 1, false);
-            }
-            if (!moved && !moveItemStackTo(stack, RITUAL, kitSlots, false)) {
-                return ItemStack.EMPTY;
-            }
+        } else if (!moveItemStackTo(stack, 0, STORAGE, false)) {
+            return ItemStack.EMPTY;
         }
         if (stack.isEmpty()) {
             slot.setByPlayer(ItemStack.EMPTY);

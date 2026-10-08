@@ -18,6 +18,7 @@ public class PocketData extends SavedData {
     public static class Plot {
         public int index;
         public int level;
+        public int guestLevel;
         public boolean built;
     }
 
@@ -69,6 +70,7 @@ public class PocketData extends SavedData {
             t.putUUID("owner", entry.getKey());
             t.putInt("index", entry.getValue().index);
             t.putInt("level", entry.getValue().level);
+            t.putInt("guestLevel", entry.getValue().guestLevel);
             t.putBoolean("built", entry.getValue().built);
             list.add(t);
         }
@@ -98,6 +100,7 @@ public class PocketData extends SavedData {
             Plot p = new Plot();
             p.index = t.getInt("index");
             p.level = t.getInt("level");
+            p.guestLevel = t.getInt("guestLevel");
             p.built = t.getBoolean("built");
             data.plots.put(t.getUUID("owner"), p);
         }

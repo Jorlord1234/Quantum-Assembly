@@ -10,11 +10,13 @@ import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 
-/** The upgrade screen of the Pocket Controls. It has no item slots, only 3 buttons. */
+/** The screen of the Pocket Controls. It has no item slots: upgrade cards and a few buttons. */
 public class PocketControlsMenu extends AbstractContainerMenu {
     public static final int BUTTON_UPGRADE = 0;
     public static final int BUTTON_LINK = 1;
     public static final int BUTTON_DISASSEMBLE = 2;
+    public static final int BUTTON_GUESTS = 3;
+    private static final int DATA_COUNT = 6;
 
     private final PocketControlsBlockEntity controls;
     private final ContainerData data;
@@ -23,7 +25,7 @@ public class PocketControlsMenu extends AbstractContainerMenu {
     public PocketControlsMenu(int id, Inventory inventory, RegistryFriendlyByteBuf buf) {
         super(ModMenus.CONTROLS.get(), id);
         this.controls = null;
-        this.data = new SimpleContainerData(3);
+        this.data = new SimpleContainerData(DATA_COUNT);
         addDataSlots(data);
     }
 
@@ -40,13 +42,21 @@ public class PocketControlsMenu extends AbstractContainerMenu {
                 }
                 PocketData.Plot plot = PocketData.get(player.getServer()).existing(controls.getOwner() != null ? controls.getOwner() : player.getUUID());
                 int level = plot == null ? 0 : plot.level;
-                if (index == 0) {
-                    return level;
+                int guests = plot == null ? 0 : plot.guestLevel;
+                switch (index) {
+                    case 0:
+                        return level;
+                    case 1:
+                        return level >= PocketManager.RADIUS.length - 1 ? 0 : PocketManager.COST[level + 1];
+                    case 2:
+                        return PocketManager.RADIUS[level] * 2 + 1;
+                    case 3:
+                        return guests;
+                    case 4:
+                        return guests >= PocketManager.GUEST_MAX.length - 1 ? 0 : PocketManager.GUEST_COST[guests + 1];
+                    default:
+                        return PocketManager.GUEST_MAX[guests];
                 }
-                if (index == 1) {
-                    return level >= PocketManager.RADIUS.length - 1 ? 0 : PocketManager.COST[level + 1];
-                }
-                return PocketManager.RADIUS[level] * 2 + 1;
             }
 
             @Override
@@ -55,7 +65,7 @@ public class PocketControlsMenu extends AbstractContainerMenu {
 
             @Override
             public int getCount() {
-                return 3;
+                return DATA_COUNT;
             }
         };
         addDataSlots(data);
@@ -73,6 +83,18 @@ public class PocketControlsMenu extends AbstractContainerMenu {
         return data.get(2);
     }
 
+    public int guestLevel() {
+        return data.get(3);
+    }
+
+    public int guestNextCost() {
+        return data.get(4);
+    }
+
+    public int guestMax() {
+        return data.get(5);
+    }
+
     @Override
     public boolean clickMenuButton(Player player, int id) {
         if (controls == null || !(player instanceof ServerPlayer serverPlayer)) {
@@ -80,6 +102,10 @@ public class PocketControlsMenu extends AbstractContainerMenu {
         }
         if (id == BUTTON_UPGRADE) {
             PocketManager.upgrade(serverPlayer);
+            return true;
+        }
+        if (id == BUTTON_GUESTS) {
+            PocketManager.upgradeGuests(serverPlayer);
             return true;
         }
         if (id == BUTTON_LINK) {

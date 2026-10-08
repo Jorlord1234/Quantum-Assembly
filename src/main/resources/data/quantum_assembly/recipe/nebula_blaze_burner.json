@@ -7,7 +7,7 @@
     "item": "create:blaze_burner"
   },
   "addition": {
-    "item": "minecraft:dragon_head"
+    "item": "quantum_assembly:quantum_assembly_kit"
   },
   "result": {
     "id": "quantum_assembly:nebula_blaze_burner",

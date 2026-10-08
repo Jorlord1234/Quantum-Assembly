@@ -31,6 +31,10 @@ public class PocketManager {
     public static final int[] RADIUS = {8, 12, 16, 24, 32, 48};
     /** Starglass needed to reach level 1 to 5. */
     public static final int[] COST = {0, 8, 16, 32, 64, 128};
+    /** How many guests (other players) can be inside your space at the same time, level 0 to 4. */
+    public static final int[] GUEST_MAX = {1, 2, 4, 8, 16};
+    /** Starglass needed to reach guest level 1 to 4. */
+    public static final int[] GUEST_COST = {0, 4, 8, 16, 32};
 
     public static BlockPos center(PocketData.Plot plot) {
         return new BlockPos(plot.index * SPACING, FLOOR_Y, 0);
@@ -67,6 +71,19 @@ public class PocketManager {
         }
         PocketData data = PocketData.get(server);
         PocketData.Plot plot = data.plot(owner);
+        if (!player.getUUID().equals(owner)) {
+            int inside = 0;
+            for (ServerPlayer other : pocket.players()) {
+                if (!other.getUUID().equals(owner) && !other.getUUID().equals(player.getUUID())
+                        && Math.round((float) other.getX() / SPACING) == plot.index) {
+                    inside++;
+                }
+            }
+            if (inside >= GUEST_MAX[plot.guestLevel]) {
+                player.displayClientMessage(Component.translatable("message.quantum_assembly.pocket_full", GUEST_MAX[plot.guestLevel]), true);
+                return;
+            }
+        }
         if (!plot.built) {
             build(pocket, plot, -1);
             plot.built = true;
@@ -137,6 +154,40 @@ public class PocketManager {
         }
         data.setDirty();
         player.displayClientMessage(Component.translatable("message.quantum_assembly.upgraded", plot.level, RADIUS[plot.level] * 2 + 1), true);
+    }
+
+    /** Spend Starglass to let more guests in at the same time. */
+    public static void upgradeGuests(ServerPlayer player) {
+        PocketData data = PocketData.get(player.getServer());
+        PocketData.Plot plot = data.plot(player.getUUID());
+        if (plot.guestLevel >= GUEST_MAX.length - 1) {
+            player.displayClientMessage(Component.translatable("message.quantum_assembly.max_guests"), true);
+            return;
+        }
+        int cost = GUEST_COST[plot.guestLevel + 1];
+        int have = 0;
+        for (ItemStack stack : player.getInventory().items) {
+            if (stack.is(ModItems.STARGLASS.get())) {
+                have += stack.getCount();
+            }
+        }
+        if (have < cost) {
+            player.displayClientMessage(Component.translatable("message.quantum_assembly.need_starglass", cost, have), true);
+            return;
+        }
+        if (!player.isCreative()) {
+            int left = cost;
+            for (ItemStack stack : player.getInventory().items) {
+                if (left > 0 && stack.is(ModItems.STARGLASS.get())) {
+                    int take = Math.min(left, stack.getCount());
+                    stack.shrink(take);
+                    left -= take;
+                }
+            }
+        }
+        plot.guestLevel++;
+        data.setDirty();
+        player.displayClientMessage(Component.translatable("message.quantum_assembly.guests_upgraded", plot.guestLevel, GUEST_MAX[plot.guestLevel]), true);
     }
 
     /** Builds (or rebuilds bigger) a player's floor and invisible walls. */
