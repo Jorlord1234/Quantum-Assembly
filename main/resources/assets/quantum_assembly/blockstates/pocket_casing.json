@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "assembled=false": {
+      "model": "quantum_assembly:block/pocket_casing"
+    },
+    "assembled=true": {
+      "model": "quantum_assembly:block/pocket_casing_active"
+    }
+  }
+}

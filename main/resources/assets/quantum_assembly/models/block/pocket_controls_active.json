@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "top": "quantum_assembly:block/pocket_casing_active",
+    "side": "quantum_assembly:block/pocket_casing_active",
+    "front": "quantum_assembly:block/pocket_controls_front_active"
+  }
+}

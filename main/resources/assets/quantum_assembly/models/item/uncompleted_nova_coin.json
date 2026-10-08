@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "quantum_assembly:item/uncompleted_nova_coin"
+  }
+}
