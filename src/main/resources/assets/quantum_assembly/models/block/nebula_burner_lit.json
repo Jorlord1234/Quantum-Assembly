@@ -1,37 +1,6 @@
 {
-  "parent": "minecraft:block/block",
-  "loader": "neoforge:obj",
-  "flip_v": true,
-  "model": "quantum_assembly:models/block/nebula_burner/item.obj",
+  "parent": "minecraft:block/cube_all",
   "textures": {
-    "0": "quantum_assembly:block/nebula_brazier",
-    "1": "quantum_assembly:block/nebula_blaze_lit",
-    "particle": "quantum_assembly:block/nebula_brazier"
-  },
-  "display": {
-    "gui": {
-      "rotation": [
-        30,
-        315,
-        0
-      ],
-      "scale": [
-        0.7,
-        0.7,
-        0.7
-      ]
-    },
-    "fixed": {
-      "rotation": [
-        0,
-        180,
-        0
-      ],
-      "scale": [
-        0.5,
-        0.5,
-        0.5
-      ]
-    }
+    "all": "minecraft:block/amethyst_block"
   }
 }
