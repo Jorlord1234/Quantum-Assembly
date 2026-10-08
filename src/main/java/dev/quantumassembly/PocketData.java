@@ -9,6 +9,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.saveddata.SavedData;
 
 /** Remembers every owner's pocket space, and where every visitor has to go back to. */
@@ -19,7 +20,15 @@ public class PocketData extends SavedData {
         public int index;
         public int level;
         public int guestLevel;
+        public int restLevel;
+        public int vaultLevel;
         public boolean built;
+        /** The Pocket Vault: up to 54 slots, how many are usable depends on vaultLevel. */
+        public final ItemStack[] vault = new ItemStack[54];
+
+        public Plot() {
+            java.util.Arrays.fill(vault, ItemStack.EMPTY);
+        }
     }
 
     public static class Return {
@@ -52,6 +61,16 @@ public class PocketData extends SavedData {
         return plots.get(id);
     }
 
+    /** The plot with this index (they sit next to each other in the pocket dimension), or null. */
+    public Plot byIndex(int index) {
+        for (Plot plot : plots.values()) {
+            if (plot.index == index) {
+                return plot;
+            }
+        }
+        return null;
+    }
+
     public void setReturn(UUID visitor, Return value) {
         returns.put(visitor, value);
         setDirty();
@@ -71,6 +90,20 @@ public class PocketData extends SavedData {
             t.putInt("index", entry.getValue().index);
             t.putInt("level", entry.getValue().level);
             t.putInt("guestLevel", entry.getValue().guestLevel);
+            t.putInt("restLevel", entry.getValue().restLevel);
+            t.putInt("vaultLevel", entry.getValue().vaultLevel);
+            ListTag vault = new ListTag();
+            for (int i = 0; i < entry.getValue().vault.length; i++) {
+                ItemStack stack = entry.getValue().vault[i];
+                if (!stack.isEmpty()) {
+                    CompoundTag e = new CompoundTag();
+                    e.putInt("slot", i);
+                    e.putInt("n", stack.getCount());
+                    e.put("item", stack.copyWithCount(1).save(registries));
+                    vault.add(e);
+                }
+            }
+            t.put("vault", vault);
             t.putBoolean("built", entry.getValue().built);
             list.add(t);
         }
@@ -101,6 +134,20 @@ public class PocketData extends SavedData {
             p.index = t.getInt("index");
             p.level = t.getInt("level");
             p.guestLevel = t.getInt("guestLevel");
+            p.restLevel = t.getInt("restLevel");
+            p.vaultLevel = t.getInt("vaultLevel");
+            ListTag vault = t.getList("vault", Tag.TAG_COMPOUND);
+            for (int v = 0; v < vault.size(); v++) {
+                CompoundTag e = vault.getCompound(v);
+                int slot = e.getInt("slot");
+                if (slot >= 0 && slot < p.vault.length) {
+                    ItemStack stack = ItemStack.parse(registries, e.get("item")).orElse(ItemStack.EMPTY);
+                    if (!stack.isEmpty()) {
+                        stack.setCount(Math.max(1, e.getInt("n")));
+                        p.vault[slot] = stack;
+                    }
+                }
+            }
             p.built = t.getBoolean("built");
             data.plots.put(t.getUUID("owner"), p);
         }

@@ -12,6 +12,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.inventory.ChestMenu;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -35,6 +41,13 @@ public class PocketManager {
     public static final int[] GUEST_MAX = {1, 2, 4, 8, 16};
     /** Starglass needed to reach guest level 1 to 4. */
     public static final int[] GUEST_COST = {0, 4, 8, 16, 32};
+    /** Rest: level 0 = off, 1 = Regeneration I, 2 = Regeneration II, 3 = Regeneration II and never hungry. */
+    public static final int[] REST_COST = {0, 8, 16, 32};
+    /** Pocket Vault: rows of storage (9 slots each) at level 0 to 4. */
+    public static final int[] VAULT_ROWS = {0, 1, 3, 4, 6};
+    public static final int[] VAULT_COST = {0, 8, 16, 32, 64};
+    private static final MenuType<?>[] CHEST_TYPES = {null, MenuType.GENERIC_9x1, MenuType.GENERIC_9x2,
+            MenuType.GENERIC_9x3, MenuType.GENERIC_9x4, MenuType.GENERIC_9x5, MenuType.GENERIC_9x6};
 
     public static BlockPos center(PocketData.Plot plot) {
         return new BlockPos(plot.index * SPACING, FLOOR_Y, 0);
@@ -188,6 +201,119 @@ public class PocketManager {
         plot.guestLevel++;
         data.setDirty();
         player.displayClientMessage(Component.translatable("message.quantum_assembly.guests_upgraded", plot.guestLevel, GUEST_MAX[plot.guestLevel]), true);
+    }
+
+    /** Takes the Starglass for an upgrade (not in creative). Returns false and tells the player if there is not enough. */
+    private static boolean pay(ServerPlayer player, int cost) {
+        int have = 0;
+        for (ItemStack stack : player.getInventory().items) {
+            if (stack.is(ModItems.STARGLASS.get())) {
+                have += stack.getCount();
+            }
+        }
+        if (have < cost) {
+            player.displayClientMessage(Component.translatable("message.quantum_assembly.need_starglass", cost, have), true);
+            return false;
+        }
+        if (!player.isCreative()) {
+            int left = cost;
+            for (ItemStack stack : player.getInventory().items) {
+                if (left > 0 && stack.is(ModItems.STARGLASS.get())) {
+                    int take = Math.min(left, stack.getCount());
+                    stack.shrink(take);
+                    left -= take;
+                }
+            }
+        }
+        return true;
+    }
+
+    /** Rest: spend Starglass so you heal while you are inside your space. */
+    public static void upgradeRest(ServerPlayer player) {
+        PocketData data = PocketData.get(player.getServer());
+        PocketData.Plot plot = data.plot(player.getUUID());
+        if (plot.restLevel >= REST_COST.length - 1) {
+            player.displayClientMessage(Component.translatable("message.quantum_assembly.max_rest"), true);
+            return;
+        }
+        if (!pay(player, REST_COST[plot.restLevel + 1])) {
+            return;
+        }
+        plot.restLevel++;
+        data.setDirty();
+        player.displayClientMessage(Component.translatable("message.quantum_assembly.rest_upgraded", plot.restLevel), true);
+    }
+
+    /** Called every few seconds for a player inside the pocket dimension: the Rest effect of the space they stand in. */
+    public static void applyRest(ServerPlayer player) {
+        PocketData.Plot plot = PocketData.get(player.getServer()).byIndex(Math.round((float) player.getX() / SPACING));
+        if (plot == null || plot.restLevel <= 0) {
+            return;
+        }
+        player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 120, plot.restLevel >= 2 ? 1 : 0, true, false));
+        if (plot.restLevel >= 3) {
+            player.addEffect(new MobEffectInstance(MobEffects.SATURATION, 10, 0, true, false));
+        }
+    }
+
+    /** Pocket Vault: spend Starglass for more storage slots that belong to your space. */
+    public static void upgradeVault(ServerPlayer player) {
+        PocketData data = PocketData.get(player.getServer());
+        PocketData.Plot plot = data.plot(player.getUUID());
+        if (plot.vaultLevel >= VAULT_COST.length - 1) {
+            player.displayClientMessage(Component.translatable("message.quantum_assembly.max_vault"), true);
+            return;
+        }
+        if (!pay(player, VAULT_COST[plot.vaultLevel + 1])) {
+            return;
+        }
+        plot.vaultLevel++;
+        data.setDirty();
+        player.displayClientMessage(Component.translatable("message.quantum_assembly.vault_upgraded", VAULT_ROWS[plot.vaultLevel] * 9), true);
+    }
+
+    /** Opens the Pocket Vault as a normal chest screen. */
+    public static void openVault(ServerPlayer player) {
+        PocketData data = PocketData.get(player.getServer());
+        PocketData.Plot plot = data.plot(player.getUUID());
+        int rows = VAULT_ROWS[plot.vaultLevel];
+        if (rows == 0) {
+            player.displayClientMessage(Component.translatable("message.quantum_assembly.vault_locked"), true);
+            return;
+        }
+        VaultContainer container = new VaultContainer(data, plot, rows * 9);
+        player.openMenu(new SimpleMenuProvider(
+                (id, inventory, p) -> new ChestMenu(CHEST_TYPES[rows], id, inventory, container, rows),
+                Component.translatable("gui.quantum_assembly.vault_title")));
+    }
+
+    /** A chest-like container that writes every change back into the saved plot. */
+    private static class VaultContainer extends SimpleContainer {
+        private final PocketData data;
+        private final PocketData.Plot plot;
+        private boolean loading = true;
+
+        VaultContainer(PocketData data, PocketData.Plot plot, int size) {
+            super(size);
+            this.data = data;
+            this.plot = plot;
+            for (int i = 0; i < size; i++) {
+                setItem(i, plot.vault[i].copy());
+            }
+            loading = false;
+        }
+
+        @Override
+        public void setChanged() {
+            super.setChanged();
+            if (loading) {
+                return;
+            }
+            for (int i = 0; i < getContainerSize(); i++) {
+                plot.vault[i] = getItem(i).copy();
+            }
+            data.setDirty();
+        }
     }
 
     /** Builds (or rebuilds bigger) a player's floor and invisible walls. */

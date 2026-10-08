@@ -195,3 +195,11 @@ idea {
         downloadJavadoc = true
     }
 }
+
+// This mod must never ship files in Create's own namespaces. Old versions of the mod did, and files left behind in the
+// repository would recolor Create's NORMAL Blaze Burner. These folders are always left out of the jar.
+tasks.named('processResources', ProcessResources) {
+    exclude 'assets/create/**', 'data/create/**'
+    exclude 'assets/minecraft/**', 'assets/farmersdelight/**', 'assets/create_enchantment_industry/**'
+    exclude 'assets/waystones/**', 'assets/sophisticatedbackpacks/**'
+}

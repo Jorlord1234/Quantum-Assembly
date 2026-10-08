@@ -73,3 +73,10 @@ Note: the Nebula burner no longer heats Basins (only for the ritual), as the des
 51. [ ] Pocket Controls screen: two upgrade cards with pips, locked Kinetic card, Link and Take apart buttons
 52. [ ] Upgrade Pocket space and Guests: Starglass is taken, pips fill, button greys out at the maximum
 53. [ ] Guests: with level 0, a second guest cannot enter while one guest is inside (message). Level 1 lets two in
+
+# Extra tests for 0.14
+54. [ ] Build jar has NO assets/create folder and NO data/create folder (open the .jar as a zip)
+55. [ ] Normal Create burner + normal Blaze Cake = BLUE again, with the mod installed
+56. [ ] Controls screen shows 4 cards (Pocket space, Guests, Rest, Pocket Vault) and fits your GUI scale
+57. [ ] Rest: upgrade, stand in your space, you get Regeneration; level 3 keeps hunger full
+58. [ ] Pocket Vault: locked at first (Open greyed out). Upgrade once, Open shows 9 slots, items stay after reopening and after a restart
