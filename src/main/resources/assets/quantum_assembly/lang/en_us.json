@@ -64,5 +64,17 @@
   "gui.quantum_assembly.disassemble": "Take the machine apart",
   "gui.quantum_assembly.level": "Pocket space: level %s (%s blocks wide)",
   "gui.quantum_assembly.next": "Next upgrade: %s Starglass (you have %s)",
-  "gui.quantum_assembly.max": "Your pocket space is as big as it gets"
+  "gui.quantum_assembly.max": "Your pocket space is as big as it gets",
+  "gui.quantum_assembly.btn_upgrade": "Upgrade",
+  "gui.quantum_assembly.space_title": "Pocket space",
+  "gui.quantum_assembly.space_sub": "Level %s - %s blocks wide",
+  "gui.quantum_assembly.guests_title": "Guests",
+  "gui.quantum_assembly.guests_sub": "Up to %s guests at a time",
+  "gui.quantum_assembly.kinetic_title": "Kinetic link",
+  "gui.quantum_assembly.kinetic_sub": "RPM and stress: coming soon",
+  "gui.quantum_assembly.cost": "Next: %s Starglass (you have %s)",
+  "gui.quantum_assembly.maxed": "Maxed out",
+  "message.quantum_assembly.pocket_full": "This pocket is full (%s guests at a time). The owner can upgrade Guests",
+  "message.quantum_assembly.max_guests": "Guest space is already at its maximum",
+  "message.quantum_assembly.guests_upgraded": "Guest upgrade level %s: up to %s guests at a time"
 }
