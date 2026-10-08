@@ -76,5 +76,22 @@
   "gui.quantum_assembly.maxed": "Maxed out",
   "message.quantum_assembly.pocket_full": "This pocket is full (%s guests at a time). The owner can upgrade Guests",
   "message.quantum_assembly.max_guests": "Guest space is already at its maximum",
-  "message.quantum_assembly.guests_upgraded": "Guest upgrade level %s: up to %s guests at a time"
+  "message.quantum_assembly.guests_upgraded": "Guest upgrade level %s: up to %s guests at a time",
+  "gui.quantum_assembly.btn_open": "Open",
+  "gui.quantum_assembly.have": "Starglass: %s",
+  "gui.quantum_assembly.cost_short": "Cost: %s",
+  "gui.quantum_assembly.rest_title": "Rest",
+  "gui.quantum_assembly.rest_sub_0": "Not active",
+  "gui.quantum_assembly.rest_sub_1": "Regeneration I inside",
+  "gui.quantum_assembly.rest_sub_2": "Regeneration II inside",
+  "gui.quantum_assembly.rest_sub_3": "Regen II and never hungry",
+  "gui.quantum_assembly.vault_title": "Pocket Vault",
+  "gui.quantum_assembly.vault_sub": "%s slots of storage",
+  "gui.quantum_assembly.vault_sub_locked": "Locked: upgrade to unlock",
+  "gui.quantum_assembly.kinetic_soon": "Coming soon: Kinetic link (RPM and stress)",
+  "message.quantum_assembly.max_rest": "Rest is already at its maximum",
+  "message.quantum_assembly.rest_upgraded": "Rest upgraded to level %s",
+  "message.quantum_assembly.max_vault": "The Pocket Vault is already at its maximum",
+  "message.quantum_assembly.vault_upgraded": "Pocket Vault upgraded: %s slots",
+  "message.quantum_assembly.vault_locked": "Upgrade the Pocket Vault first"
 }
