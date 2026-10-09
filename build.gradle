@@ -202,4 +202,8 @@ tasks.named('processResources', ProcessResources) {
     exclude 'assets/create/**', 'data/create/**'
     exclude 'assets/minecraft/**', 'assets/farmersdelight/**', 'assets/create_enchantment_industry/**'
     exclude 'assets/waystones/**', 'assets/sophisticatedbackpacks/**'
+    // the old Star Shrine (replaced by the underground Quantum Lab) must not ship even if it is still in the repo
+    exclude 'data/quantum_assembly/worldgen/structure/star_shrine.json', 'data/quantum_assembly/worldgen/structure_set/star_shrine.json'
+    exclude 'data/quantum_assembly/worldgen/template_pool/star_shrine/**', 'data/quantum_assembly/structure/star_shrine/**'
+    exclude 'data/quantum_assembly/loot_table/chests/star_shrine.json'
 }

@@ -46,6 +46,7 @@ public class ModTabs {
                         output.accept(ModItems.QUANTUM_GATE.get());
                         output.accept(ModItems.QUANTUM_ASSEMBLY_KIT.get());
                         output.accept(ModItems.MASTER_CHEFS_CAULDRON.get());
+                        output.accept(ModItems.STAR_MITE_SPAWN_EGG.get());
                     })
                     .build());
 }

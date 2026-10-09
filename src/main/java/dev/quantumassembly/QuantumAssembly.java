@@ -28,6 +28,10 @@ public class QuantumAssembly {
         ModItems.ITEMS.register(modEventBus);
         ModDataComponents.COMPONENTS.register(modEventBus);
         ModTabs.TABS.register(modEventBus);
+        ModEntities.ENTITIES.register(modEventBus);
+        ModVillagers.POI_TYPES.register(modEventBus);
+        ModVillagers.PROFESSIONS.register(modEventBus);
+        modEventBus.addListener(ModEntities::registerAttributes);
 
         modEventBus.addListener(this::registerCapabilities);
         modEventBus.addListener(this::addCauldronAsCookingPot);

@@ -26,6 +26,11 @@ public class ClientSetup {
     }
 
     @SubscribeEvent
+    public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(ModEntities.STAR_MITE.get(), StarMiteRenderer::new);
+    }
+
+    @SubscribeEvent
     public static void registerScreens(RegisterMenuScreensEvent event) {
         event.register(ModMenus.KIT.get(), KitScreen::new);
         event.register(ModMenus.CONTROLS.get(), PocketControlsScreen::new);

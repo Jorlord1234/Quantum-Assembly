@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#minecraft:is_end",
+  "features": "quantum_assembly:starglass_ore_end",
+  "step": "underground_ores"
+}

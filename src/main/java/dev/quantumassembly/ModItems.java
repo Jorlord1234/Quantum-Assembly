@@ -3,6 +3,7 @@ package dev.quantumassembly;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.SpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -27,6 +28,8 @@ public class ModItems {
     /** Hidden helper item. Create: Enchantment Industry sees it as a super experience fuel. Never obtainable. */
     public static final DeferredItem<Item> SUPER_EXPERIENCE_CHARGE = ITEMS.registerSimpleItem("super_experience_charge");
     public static final DeferredItem<Item> STARGLASS = ITEMS.registerSimpleItem("starglass");
+    public static final DeferredItem<SpawnEggItem> STAR_MITE_SPAWN_EGG = ITEMS.register("star_mite_spawn_egg",
+            () -> new SpawnEggItem(ModEntities.STAR_MITE.get(), 0x2B2338, 0xB18CF0, new Item.Properties()));
 
     public static final DeferredItem<ChefsHatItem> CHEFS_HAT = ITEMS.registerItem(
             "chefs_hat", ChefsHatItem::new, new Item.Properties());

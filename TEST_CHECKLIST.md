@@ -80,3 +80,26 @@ Note: the Nebula burner no longer heats Basins (only for the ritual), as the des
 56. [ ] Controls screen shows 4 cards (Pocket space, Guests, Rest, Pocket Vault) and fits your GUI scale
 57. [ ] Rest: upgrade, stand in your space, you get Regeneration; level 3 keeps hunger full
 58. [ ] Pocket Vault: locked at first (Open greyed out). Upgrade once, Open shows 9 slots, items stay after reopening and after a restart
+
+# Extra tests for 0.15
+59. [ ] Controls screen: light panel, dark board, 5 colored groups, nodes with item icons (nothing overlaps at your GUI scale)
+60. [ ] Hover a node: tooltip with name + level, what it does, and Unlocked / Click to upgrade / Needs X Starglass / Locked
+61. [ ] Click the gold node: Starglass is taken, the node lights up, the next one gets the gold border
+62. [ ] Vault group: Open is greyed out until Vault level 1
+63. [ ] Multiblock: casing, core and controls look the same idle and active (glowing when assembled), blocks line up nicely
+
+# Extra tests for 0.16
+64. [ ] World / server still starts with the mod (worldgen files are valid)
+65. [ ] /place feature quantum_assembly:starglass_ore_end puts a vein of Starglass ore in end stone
+66. [ ] Starglass ore does not drop with a diamond pickaxe, drops with netherite
+67. [ ] /place structure quantum_assembly:star_shrine builds the shrine with a chest and 4 ore blocks
+68. [ ] The chest holds loot (Starglass, pearls, ...)
+
+# Extra tests for 0.17
+69. [ ] World still starts (worldgen files valid). In the jar there is NO star_shrine file
+70. [ ] /place structure quantum_assembly:quantum_lab builds the lab under you, with a crater, a ladder shaft and 4 rooms
+71. [ ] Library / lab / workshop / chamber look right; the villager stands in the workshop; glow squid swim in the tank
+72. [ ] Chests hold loot (Starglass, glow ink, amethyst, pearls, XP bottles, books...)
+73. [ ] Star Mite: spawn egg or spawner; purple, glowing eyes/body in the dark; biting makes you glow; drops glow ink / Starglass
+74. [ ] Quantum Engineer: purple outfit; trade list per level (see CHANGES-0.17.0.md)
+75. [ ] A normal villager next to a placed Quantum Assembly Kit can take the Quantum Engineer job
