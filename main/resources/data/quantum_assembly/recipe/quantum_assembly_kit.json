@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PIP",
+    "BST",
+    "PEP"
+  ],
+  "key": {
+    "I": {
+      "item": "sophisticatedbackpacks:inception_upgrade"
+    },
+    "B": {
+      "item": "sophisticatedbackpacks:netherite_backpack"
+    },
+    "S": {
+      "item": "sophisticatedbackpacks:stack_upgrade_tier_4"
+    },
+    "T": {
+      "tag": "create:toolboxes"
+    },
+    "E": {
+      "item": "sophisticatedbackpacks:everlasting_upgrade"
+    },
+    "P": {
+      "item": "quantum_assembly:heavy_duty_plate"
+    }
+  },
+  "result": {
+    "id": "quantum_assembly:quantum_assembly_kit",
+    "count": 1
+  }
+}

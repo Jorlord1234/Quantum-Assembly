@@ -1,0 +1,14 @@
+{
+  "fallback": "quantum_assembly:quantum_lab/caps",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "quantum_assembly:quantum_lab/workshop",
+        "processors": "minecraft:empty",
+        "projection": "rigid"
+      }
+    }
+  ]
+}

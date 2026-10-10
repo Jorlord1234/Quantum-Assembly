@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "ETE",
+    "SSS",
+    "PPP"
+  ],
+  "key": {
+    "E": {
+      "item": "create:electron_tube"
+    },
+    "T": {
+      "item": "create:transmitter"
+    },
+    "S": {
+      "item": "quantum_assembly:polished_starglass"
+    },
+    "P": {
+      "item": "quantum_assembly:heavy_duty_plate"
+    }
+  },
+  "result": {
+    "id": "quantum_assembly:quantum_processor",
+    "count": 1
+  }
+}

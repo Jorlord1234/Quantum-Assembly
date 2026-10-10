@@ -1,0 +1,87 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "minecraft:iron_block"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "id": "quantum_assembly:heavy_duty_plate"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "quantum_assembly:incomplete_heavy_duty_plate"
+        }
+      ],
+      "results": [
+        {
+          "id": "quantum_assembly:incomplete_heavy_duty_plate"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "quantum_assembly:incomplete_heavy_duty_plate"
+        }
+      ],
+      "results": [
+        {
+          "id": "quantum_assembly:incomplete_heavy_duty_plate"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "quantum_assembly:incomplete_heavy_duty_plate"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 250,
+          "fluid": "minecraft:lava"
+        }
+      ],
+      "results": [
+        {
+          "id": "quantum_assembly:incomplete_heavy_duty_plate"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "quantum_assembly:incomplete_heavy_duty_plate"
+        }
+      ],
+      "results": [
+        {
+          "id": "quantum_assembly:incomplete_heavy_duty_plate"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "quantum_assembly:incomplete_heavy_duty_plate"
+        }
+      ],
+      "results": [
+        {
+          "id": "quantum_assembly:incomplete_heavy_duty_plate"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "quantum_assembly:incomplete_heavy_duty_plate"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "create:sandpaper_polishing",
+  "ingredients": [
+    {
+      "item": "quantum_assembly:starglass"
+    }
+  ],
+  "results": [
+    {
+      "id": "quantum_assembly:polished_starglass"
+    }
+  ]
+}
