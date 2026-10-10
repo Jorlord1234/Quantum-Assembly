@@ -76,6 +76,11 @@ public class PocketManager {
 
     /** Go into the pocket space that belongs to "owner". */
     public static void enter(ServerPlayer player, UUID owner) {
+        enter(player, owner, player.getX(), player.getY(), player.getZ());
+    }
+
+    /** Same, but you come back out at the given position (a Gate sends you back in front of itself). */
+    public static void enter(ServerPlayer player, UUID owner, double returnX, double returnY, double returnZ) {
         MinecraftServer server = player.getServer();
         ServerLevel pocket = server.getLevel(POCKET);
         if (pocket == null) {
@@ -103,9 +108,9 @@ public class PocketManager {
         }
         PocketData.Return back = new PocketData.Return();
         back.dim = player.level().dimension().location().toString();
-        back.x = player.getX();
-        back.y = player.getY();
-        back.z = player.getZ();
+        back.x = returnX;
+        back.y = returnY;
+        back.z = returnZ;
         back.yaw = player.getYRot();
         data.setReturn(player.getUUID(), back);
         data.setDirty();

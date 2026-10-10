@@ -206,4 +206,8 @@ tasks.named('processResources', ProcessResources) {
     exclude 'data/quantum_assembly/worldgen/structure/star_shrine.json', 'data/quantum_assembly/worldgen/structure_set/star_shrine.json'
     exclude 'data/quantum_assembly/worldgen/template_pool/star_shrine/**', 'data/quantum_assembly/structure/star_shrine/**'
     exclude 'data/quantum_assembly/loot_table/chests/star_shrine.json'
+    // the cake is cooked in the Master Chef's Cauldron now, not in any cooking pot
+    exclude 'data/quantum_assembly/recipe/cake_of_nebulae.json'
+    // old versions of the lab and loot
+    exclude 'data/quantum_assembly/loot_table/chests/quantum_lab.json'
 }

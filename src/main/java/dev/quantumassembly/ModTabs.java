@@ -38,6 +38,9 @@ public class ModTabs {
                         output.accept(ModItems.CAKE_OF_NEBULAE.get());
                         output.accept(ModItems.CHEFS_HAT.get());
                         output.accept(ModItems.STARGLASS.get());
+                        output.accept(ModItems.POLISHED_STARGLASS.get());
+                        output.accept(ModItems.HEAVY_DUTY_PLATE.get());
+                        output.accept(ModItems.QUANTUM_PROCESSOR.get());
                         output.accept(ModItems.STARGLASS_ORE.get());
                         output.accept(ModItems.NEBULA_BLAZE_BURNER.get());
                         output.accept(ModItems.POCKET_CASING.get());
@@ -46,7 +49,7 @@ public class ModTabs {
                         output.accept(ModItems.QUANTUM_GATE.get());
                         output.accept(ModItems.QUANTUM_ASSEMBLY_KIT.get());
                         output.accept(ModItems.MASTER_CHEFS_CAULDRON.get());
-                        output.accept(ModItems.STAR_MITE_SPAWN_EGG.get());
+                        output.accept(ModItems.STAR_CRAWLER_SPAWN_EGG.get());
                     })
                     .build());
 }

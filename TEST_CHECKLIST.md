@@ -103,3 +103,15 @@ Note: the Nebula burner no longer heats Basins (only for the ritual), as the des
 73. [ ] Star Mite: spawn egg or spawner; purple, glowing eyes/body in the dark; biting makes you glow; drops glow ink / Starglass
 74. [ ] Quantum Engineer: purple outfit; trade list per level (see CHANGES-0.17.0.md)
 75. [ ] A normal villager next to a placed Quantum Assembly Kit can take the Quantum Engineer job
+
+# Extra tests for 0.18
+76. [ ] The burner cage is see-through; the head bobs and turns toward you; lit = rods float
+77. [ ] /place structure quantum_assembly:quantum_lab : crater with a meteor, a 1x1 ladder hole going far down, a hub, random halls and rooms (try it a few times for different layouts)
+78. [ ] Library has a balcony + ladder; lab has glow squid; workshop has the Engineer; chamber has 4 cages
+79. [ ] Star Crawler (spawn egg): big beetle, glowing, bite makes you glow; drops glow ink
+80. [ ] Villager trades are stingy (see CHANGES-0.18.0.md)
+81. [ ] Iron block -> Heavy Duty Plate (Create: press, press, lava, press, press)
+82. [ ] Starglass + sandpaper = Polished Starglass; Quantum Processor crafts in the ETE / SSS / PPP pattern
+83. [ ] Kit recipe has plates in all 4 corners
+84. [ ] Cake: batter right-click on the Master Chef's Cauldron over a campfire = cake after 30 s; a normal cooking pot does NOT make it
+85. [ ] Quantum Gate: link it, walk through; you return in front of it; textures look right (coin, template, starglass, ore)

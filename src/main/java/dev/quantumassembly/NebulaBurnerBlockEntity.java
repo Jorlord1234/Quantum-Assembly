@@ -29,6 +29,9 @@ public class NebulaBurnerBlockEntity extends BlockEntity {
 
     private final NonNullList<ItemStack> items = NonNullList.withSize(3, ItemStack.EMPTY);
     private int progress = 0;
+    /** Client only: the direction the head currently looks in (degrees) for the animation. */
+    public float headAngle;
+    public boolean headAngleReady;
 
     public NebulaBurnerBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.NEBULA_BURNER.get(), pos, state);

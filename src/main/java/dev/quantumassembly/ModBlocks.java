@@ -67,6 +67,7 @@ public class ModBlocks {
                     .mapColor(MapColor.GOLD)
                     .strength(2.0F, 6.0F)
                     .sound(SoundType.METAL)
+                    .lightLevel(state -> state.getValue(CauldronBlock.COOKING) ? 10 : 0)
                     .noOcclusion());
 
     public static final DeferredBlock<NebulaBurnerBlock> NEBULA_BLAZE_BURNER = BLOCKS.registerBlock("nebula_blaze_burner",

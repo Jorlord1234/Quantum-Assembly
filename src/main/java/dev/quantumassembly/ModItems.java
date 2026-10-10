@@ -28,8 +28,14 @@ public class ModItems {
     /** Hidden helper item. Create: Enchantment Industry sees it as a super experience fuel. Never obtainable. */
     public static final DeferredItem<Item> SUPER_EXPERIENCE_CHARGE = ITEMS.registerSimpleItem("super_experience_charge");
     public static final DeferredItem<Item> STARGLASS = ITEMS.registerSimpleItem("starglass");
-    public static final DeferredItem<SpawnEggItem> STAR_MITE_SPAWN_EGG = ITEMS.register("star_mite_spawn_egg",
-            () -> new SpawnEggItem(ModEntities.STAR_MITE.get(), 0x2B2338, 0xB18CF0, new Item.Properties()));
+    public static final DeferredItem<Item> POLISHED_STARGLASS = ITEMS.registerSimpleItem("polished_starglass");
+    public static final DeferredItem<Item> HEAVY_DUTY_PLATE = ITEMS.registerSimpleItem("heavy_duty_plate");
+    /** The in-between item of the Heavy Duty Plate (shows the Create sequenced assembly progress bar). */
+    public static final DeferredItem<IncompleteCatalystItem> INCOMPLETE_HEAVY_DUTY_PLATE = ITEMS.registerItem(
+            "incomplete_heavy_duty_plate", IncompleteCatalystItem::new, new Item.Properties());
+    public static final DeferredItem<Item> QUANTUM_PROCESSOR = ITEMS.registerSimpleItem("quantum_processor");
+    public static final DeferredItem<SpawnEggItem> STAR_CRAWLER_SPAWN_EGG = ITEMS.register("star_crawler_spawn_egg",
+            () -> new SpawnEggItem(ModEntities.STAR_CRAWLER.get(), 0x2B2338, 0xB18CF0, new Item.Properties()));
 
     public static final DeferredItem<ChefsHatItem> CHEFS_HAT = ITEMS.registerItem(
             "chefs_hat", ChefsHatItem::new, new Item.Properties());
