@@ -9,6 +9,7 @@
     "cage": {
       "loader": "neoforge:obj",
       "flip_v": true,
+      "render_type": "minecraft:cutout",
       "model": "quantum_assembly:models/block/nebula_burner/blaze_cage.obj",
       "textures": {
         "0": "quantum_assembly:block/nebula_brazier"
@@ -16,7 +17,8 @@
     },
     "head": {
       "textures": {
-        "2": "quantum_assembly:block/nebula_blaze_cold"
+        "2": "quantum_assembly:block/nebula_blaze_cold",
+        "particle": "quantum_assembly:block/nebula_blaze_cold"
       },
       "elements": [
         {
@@ -87,7 +89,8 @@
             }
           }
         }
-      ]
+      ],
+      "render_type": "minecraft:cutout"
     }
   },
   "item_render_order": [

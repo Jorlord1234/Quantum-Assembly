@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/block",
+  "loader": "neoforge:obj",
+  "flip_v": true,
+  "render_type": "minecraft:cutout",
+  "model": "quantum_assembly:models/block/nebula_burner/blaze_cage.obj",
+  "textures": {
+    "0": "quantum_assembly:block/nebula_brazier",
+    "particle": "quantum_assembly:block/nebula_brazier"
+  }
+}

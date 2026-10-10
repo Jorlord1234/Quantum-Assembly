@@ -1,0 +1,10 @@
+{
+  "parent": "minecraft:block/block",
+  "loader": "neoforge:obj",
+  "flip_v": true,
+  "model": "quantum_assembly:models/block/nebula_burner/blaze_rods_large.obj",
+  "textures": {
+    "0": "quantum_assembly:block/nebula_blaze_lit",
+    "particle": "quantum_assembly:block/nebula_blaze_lit"
+  }
+}
