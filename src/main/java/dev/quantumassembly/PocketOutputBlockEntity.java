@@ -27,8 +27,8 @@ public class PocketOutputBlockEntity extends GeneratingKineticBlockEntity {
     private float capacityPerRpm;
     private int checkTimer;
 
-    public PocketOutputBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
-        super(type, pos, state);
+    public PocketOutputBlockEntity(BlockPos pos, BlockState state) {
+        super(ModBlockEntities.POCKET_OUTPUT.get(), pos, state);
     }
 
     @Override
