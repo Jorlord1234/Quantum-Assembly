@@ -19,8 +19,8 @@ public class KineticPortBlockEntity extends KineticBlockEntity {
     private float impact;
     private int checkTimer;
 
-    public KineticPortBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
-        super(type, pos, state);
+    public KineticPortBlockEntity(BlockPos pos, BlockState state) {
+        super(ModBlockEntities.KINETIC_PORT.get(), pos, state);
     }
 
     /** The load we should have right now, from the Power level of the owner of the multiblock we are part of. */
