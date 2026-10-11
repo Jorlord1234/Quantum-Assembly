@@ -130,7 +130,7 @@ dependencies {
     compileOnly "maven.modrinth:farmers-delight:XTVZDOol"
 
     // Create (same version line as the pack: 6.0.10). Compile only: Create is a required mod at runtime.
-    compileOnly("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") { transitive = false }
+    compileOnly("com.simibubi.create:create-${minecraft_version}:${create_version}") { transitive = false }
     compileOnly("net.createmod.ponder:ponder-neoforge:${ponder_version}+mc${minecraft_version}")
     compileOnly("dev.engine-room.flywheel:flywheel-neoforge-api-${minecraft_version}:${flywheel_version}")
     compileOnly("com.tterrag.registrate:Registrate:${registrate_version}")
