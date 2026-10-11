@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "quantum_assembly:pocket_casing"
+    },
+    {
+      "item": "create:shaft"
+    },
+    {
+      "item": "create:electron_tube"
+    }
+  ],
+  "result": {
+    "id": "quantum_assembly:kinetic_port",
+    "count": 1
+  }
+}

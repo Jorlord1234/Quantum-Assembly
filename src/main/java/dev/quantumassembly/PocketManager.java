@@ -261,6 +261,47 @@ public class PocketManager {
         }
     }
 
+    /** Power: Create stress capacity (SU per RPM) the pocket gets from the Kinetic Port, level 0 to 3. */
+    public static final int[] POWER_CAPACITY = {0, 16, 64, 256};
+    /** Starglass needed to reach power level 1 to 3. */
+    public static final int[] POWER_COST = {0, 16, 32, 64};
+
+    /** Which plot a position in the pocket dimension belongs to (the plots sit next to each other along x). */
+    public static int plotIndexAt(double x) {
+        return Math.round((float) x / SPACING);
+    }
+
+    /** Power: spend Starglass so the Kinetic Port can send rotation into your space. */
+    public static void upgradePower(ServerPlayer player) {
+        PocketData data = PocketData.get(player.getServer());
+        PocketData.Plot plot = data.plot(player.getUUID());
+        if (plot.powerLevel >= POWER_COST.length - 1) {
+            player.displayClientMessage(Component.translatable("message.quantum_assembly.max_power"), true);
+            return;
+        }
+        if (!pay(player, POWER_COST[plot.powerLevel + 1])) {
+            return;
+        }
+        plot.powerLevel++;
+        data.setDirty();
+        player.displayClientMessage(Component.translatable("message.quantum_assembly.power_upgraded", POWER_CAPACITY[plot.powerLevel]), true);
+    }
+
+    /** Remembers where this owner's Pocket Controls are, so the Pocket Power Output knows where to look for the Kinetic Port. */
+    public static void rememberControls(PocketControlsBlockEntity controls) {
+        if (controls.getOwner() == null || !(controls.getLevel() instanceof net.minecraft.server.level.ServerLevel serverLevel)) {
+            return;
+        }
+        PocketData data = PocketData.get(serverLevel.getServer());
+        PocketData.Plot plot = data.plot(controls.getOwner());
+        String dim = serverLevel.dimension().location().toString();
+        if (!dim.equals(plot.controlsDim) || !controls.getBlockPos().equals(plot.controlsPos)) {
+            plot.controlsDim = dim;
+            plot.controlsPos = controls.getBlockPos().immutable();
+            data.setDirty();
+        }
+    }
+
     /** Pocket Vault: spend Starglass for more storage slots that belong to your space. */
     public static void upgradeVault(ServerPlayer player) {
         PocketData data = PocketData.get(player.getServer());

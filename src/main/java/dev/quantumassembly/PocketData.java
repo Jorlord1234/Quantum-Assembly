@@ -1,5 +1,7 @@
 package dev.quantumassembly;
 
+import net.minecraft.core.BlockPos;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -22,6 +24,11 @@ public class PocketData extends SavedData {
         public int guestLevel;
         public int restLevel;
         public int vaultLevel;
+        /** Power: 0 = none, 1 to 3 = how much Create stress capacity the Pocket Power Output gets. */
+        public int powerLevel;
+        /** Where this owner's Pocket Controls stand (so the Pocket Power Output can find the Kinetic Port). */
+        public String controlsDim = "";
+        public BlockPos controlsPos = BlockPos.ZERO;
         public boolean built;
         /** The Pocket Vault: up to 54 slots, how many are usable depends on vaultLevel. */
         public final ItemStack[] vault = new ItemStack[54];
@@ -92,6 +99,9 @@ public class PocketData extends SavedData {
             t.putInt("guestLevel", entry.getValue().guestLevel);
             t.putInt("restLevel", entry.getValue().restLevel);
             t.putInt("vaultLevel", entry.getValue().vaultLevel);
+            t.putInt("powerLevel", entry.getValue().powerLevel);
+            t.putString("controlsDim", entry.getValue().controlsDim);
+            t.putLong("controlsPos", entry.getValue().controlsPos.asLong());
             ListTag vault = new ListTag();
             for (int i = 0; i < entry.getValue().vault.length; i++) {
                 ItemStack stack = entry.getValue().vault[i];
@@ -136,6 +146,9 @@ public class PocketData extends SavedData {
             p.guestLevel = t.getInt("guestLevel");
             p.restLevel = t.getInt("restLevel");
             p.vaultLevel = t.getInt("vaultLevel");
+            p.powerLevel = t.getInt("powerLevel");
+            p.controlsDim = t.getString("controlsDim");
+            p.controlsPos = BlockPos.of(t.getLong("controlsPos"));
             ListTag vault = t.getList("vault", Tag.TAG_COMPOUND);
             for (int v = 0; v < vault.size(); v++) {
                 CompoundTag e = vault.getCompound(v);

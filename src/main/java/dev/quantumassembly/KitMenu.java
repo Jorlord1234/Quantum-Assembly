@@ -17,18 +17,21 @@ public class KitMenu extends AbstractContainerMenu {
 
     /** A storage slot that really holds big stacks (the normal item-handler slot never goes past 64). */
     private static class BigSlot extends SlotItemHandler {
-        BigSlot(IItemHandler handler, int index, int x, int y) {
-            super(handler, index, x, y);
+        private final KitBlockEntity kit;
+
+        BigSlot(KitBlockEntity kit, int index, int x, int y) {
+            super(kit.getStorage(), index, x, y);
+            this.kit = kit;
         }
 
         @Override
         public int getMaxStackSize() {
-            return Config.kitStackLimit();
+            return kit.slotLimit();
         }
 
         @Override
         public int getMaxStackSize(ItemStack stack) {
-            return Config.kitStackLimit();
+            return kit.slotLimit();
         }
     }
 
@@ -45,8 +48,12 @@ public class KitMenu extends AbstractContainerMenu {
         this.kit = kit;
         for (int row = 0; row < 6; row++) {
             for (int col = 0; col < 9; col++) {
-                addSlot(new BigSlot(kit.getStorage(), col + row * 9, 8 + col * 18, 18 + row * 18));
+                addSlot(new BigSlot(kit, col + row * 9, 8 + col * 18, 18 + row * 18));
             }
+        }
+        // the 4 Sophisticated Backpacks upgrade slots, in a column on the left of the screen
+        for (int i = 0; i < KitBlockEntity.UPGRADE_SLOTS; i++) {
+            addSlot(new SlotItemHandler(kit.getUpgrades(), i, -22, 18 + i * 18));
         }
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 9; col++) {
@@ -55,6 +62,18 @@ public class KitMenu extends AbstractContainerMenu {
         }
         for (int col = 0; col < 9; col++) {
             addSlot(new Slot(inventory, col, 8 + col * 18, 198));
+        }
+        // the lid opens while somebody has the Kit open
+        if (!inventory.player.level().isClientSide) {
+            kit.startOpen(inventory.player);
+        }
+    }
+
+    @Override
+    public void removed(Player player) {
+        super.removed(player);
+        if (!player.level().isClientSide) {
+            kit.stopOpen(player);
         }
     }
 
@@ -71,12 +90,18 @@ public class KitMenu extends AbstractContainerMenu {
         }
         ItemStack stack = slot.getItem();
         ItemStack copy = stack.copy();
-        if (index < STORAGE) {
-            if (!moveItemStackTo(stack, STORAGE, slots.size(), true)) {
+        int upgradeEnd = STORAGE + KitBlockEntity.UPGRADE_SLOTS;
+        if (index < upgradeEnd) {
+            // storage or upgrade slot -> your inventory
+            if (!moveItemStackTo(stack, upgradeEnd, slots.size(), true)) {
                 return ItemStack.EMPTY;
             }
-        } else if (!moveItemStackTo(stack, 0, STORAGE, false)) {
-            return ItemStack.EMPTY;
+        } else {
+            // your inventory -> an upgrade slot (for upgrades), otherwise the storage
+            boolean moved = KitBlockEntity.isBackpackUpgrade(stack) && moveItemStackTo(stack, STORAGE, upgradeEnd, false);
+            if (!moved && !moveItemStackTo(stack, 0, STORAGE, false)) {
+                return ItemStack.EMPTY;
+            }
         }
         if (stack.isEmpty()) {
             slot.setByPlayer(ItemStack.EMPTY);

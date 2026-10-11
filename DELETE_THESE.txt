@@ -1,0 +1,7 @@
+Not used any more, safe to delete from src/main/resources:
+assets/quantum_assembly/textures/block/quantum_gate_frame.png
+assets/quantum_assembly/textures/block/quantum_gate_portal.png
+assets/quantum_assembly/textures/block/quantum_gate_portal.png.mcmeta
+assets/quantum_assembly/textures/item/quantum_gate.png
+assets/quantum_assembly/models/block/nebula_burner_lit.json (old composite, if still there)
+Star Mite leftovers: anything with star_mite in its name

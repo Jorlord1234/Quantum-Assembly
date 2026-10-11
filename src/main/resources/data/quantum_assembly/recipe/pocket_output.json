@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "quantum_assembly:pocket_casing"
+    },
+    {
+      "item": "create:shaft"
+    },
+    {
+      "item": "quantum_assembly:polished_starglass"
+    }
+  ],
+  "result": {
+    "id": "quantum_assembly:pocket_output",
+    "count": 1
+  }
+}

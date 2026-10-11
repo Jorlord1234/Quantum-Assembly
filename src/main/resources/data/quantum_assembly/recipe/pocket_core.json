@@ -1,20 +1,19 @@
 {
-  "type": "minecraft:crafting_shapeless",
+  "type": "minecraft:crafting_shaped",
   "category": "misc",
-  "ingredients": [
-    {
+  "pattern": [
+    "CCC",
+    "CNC",
+    "CCC"
+  ],
+  "key": {
+    "C": {
       "item": "quantum_assembly:pocket_casing"
     },
-    {
-      "item": "minecraft:ender_chest"
-    },
-    {
-      "item": "minecraft:echo_shard"
-    },
-    {
-      "item": "minecraft:echo_shard"
+    "N": {
+      "item": "minecraft:nether_star"
     }
-  ],
+  },
   "result": {
     "id": "quantum_assembly:pocket_core",
     "count": 1

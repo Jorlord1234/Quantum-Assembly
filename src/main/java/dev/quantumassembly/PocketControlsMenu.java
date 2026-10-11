@@ -19,7 +19,8 @@ public class PocketControlsMenu extends AbstractContainerMenu {
     public static final int BUTTON_REST = 4;
     public static final int BUTTON_VAULT_UPGRADE = 5;
     public static final int BUTTON_VAULT_OPEN = 6;
-    private static final int DATA_COUNT = 11;
+    public static final int BUTTON_POWER_UPGRADE = 7;
+    private static final int DATA_COUNT = 13;
 
     private final PocketControlsBlockEntity controls;
     private final ContainerData data;
@@ -36,6 +37,7 @@ public class PocketControlsMenu extends AbstractContainerMenu {
     public PocketControlsMenu(int id, Inventory inventory, PocketControlsBlockEntity controls) {
         super(ModMenus.CONTROLS.get(), id);
         this.controls = controls;
+        PocketManager.rememberControls(controls);
         final ServerPlayer player = inventory.player instanceof ServerPlayer ? (ServerPlayer) inventory.player : null;
         this.data = new ContainerData() {
             @Override
@@ -48,6 +50,7 @@ public class PocketControlsMenu extends AbstractContainerMenu {
                 int guests = plot == null ? 0 : plot.guestLevel;
                 int rest = plot == null ? 0 : plot.restLevel;
                 int vault = plot == null ? 0 : plot.vaultLevel;
+                int power = plot == null ? 0 : plot.powerLevel;
                 switch (index) {
                     case 0:
                         return level;
@@ -69,6 +72,10 @@ public class PocketControlsMenu extends AbstractContainerMenu {
                         return vault;
                     case 9:
                         return vault >= PocketManager.VAULT_COST.length - 1 ? 0 : PocketManager.VAULT_COST[vault + 1];
+                    case 11:
+                        return power;
+                    case 12:
+                        return power >= PocketManager.POWER_COST.length - 1 ? 0 : PocketManager.POWER_COST[power + 1];
                     default:
                         return PocketManager.VAULT_ROWS[vault] * 9;
                 }
@@ -130,6 +137,14 @@ public class PocketControlsMenu extends AbstractContainerMenu {
         return data.get(10);
     }
 
+    public int powerLevel() {
+        return data.get(11);
+    }
+
+    public int powerNextCost() {
+        return data.get(12);
+    }
+
     @Override
     public boolean clickMenuButton(Player player, int id) {
         if (controls == null || !(player instanceof ServerPlayer serverPlayer)) {
@@ -149,6 +164,10 @@ public class PocketControlsMenu extends AbstractContainerMenu {
         }
         if (id == BUTTON_VAULT_UPGRADE) {
             PocketManager.upgradeVault(serverPlayer);
+            return true;
+        }
+        if (id == BUTTON_POWER_UPGRADE) {
+            PocketManager.upgradePower(serverPlayer);
             return true;
         }
         if (id == BUTTON_VAULT_OPEN) {

@@ -37,6 +37,8 @@ public class ClientSetup {
         event.register(NebulaBurnerRenderer.HEAD_LIT);
         event.register(NebulaBurnerRenderer.RODS_SMALL);
         event.register(NebulaBurnerRenderer.RODS_LARGE);
+        // the lid of the Quantum Assembly Kit swings open like a Create toolbox
+        event.register(KitRenderer.LID);
     }
 
     @SubscribeEvent
@@ -49,6 +51,7 @@ public class ClientSetup {
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntities.STAR_CRAWLER.get(), StarCrawlerRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.NEBULA_BURNER.get(), NebulaBurnerRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.KIT.get(), KitRenderer::new);
     }
 
     @SubscribeEvent

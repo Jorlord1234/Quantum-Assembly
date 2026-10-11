@@ -24,9 +24,10 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 /**
- * The Quantum Gate: a portal ring. Link it to a Pocket Controls (press "Link a Gate" there, then right-click the
- * Gate), after that just walk through it. Inside the pocket, a Gate brings you back out in front of the Gate you came
- * in through.
+ * The Quantum Gate: the portal that a Quantum Gun opens (see QuantumGunItem). The gun links it to a Pocket Controls
+ * when it opens it; walking through it takes you into the pocket. Right-clicking it does nothing, so a click with the
+ * gun reaches the gun (which closes the gate again). Inside the pocket, a Gate brings you back out in front of the
+ * Gate you came in through.
  */
 public class QuantumGateBlock extends FacingShapedBlock implements EntityBlock {
     private static final String COOLDOWN = "quantum_assembly_gate_cooldown";
@@ -57,34 +58,22 @@ public class QuantumGateBlock extends FacingShapedBlock implements EntityBlock {
             return;
         }
         player.getPersistentData().putLong(COOLDOWN, now + COOLDOWN_TICKS);
-        handle(state, level, pos, player, true);
+        handle(state, level, pos, player);
     }
 
+    /** Right-click does nothing: you walk through the gate, and the Quantum Gun opens and closes it. */
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
-        if (level.isClientSide || !(player instanceof ServerPlayer serverPlayer)) {
-            return InteractionResult.SUCCESS;
-        }
-        serverPlayer.getPersistentData().putLong(COOLDOWN, level.getGameTime() + COOLDOWN_TICKS);
-        handle(state, level, pos, serverPlayer, false);
-        return InteractionResult.SUCCESS;
+        return InteractionResult.PASS;
     }
 
-    private void handle(BlockState state, Level level, BlockPos pos, ServerPlayer serverPlayer, boolean walkedIn) {
+    private void handle(BlockState state, Level level, BlockPos pos, ServerPlayer serverPlayer) {
         if (level.dimension().equals(PocketManager.POCKET)) {
             PocketManager.leave(serverPlayer);
             return;
         }
         if (!(level.getBlockEntity(pos) instanceof GateBlockEntity gate)) {
             return;
-        }
-        if (!walkedIn) {
-            PocketManager.Pending pending = PocketManager.takePending(serverPlayer);
-            if (pending != null) {
-                gate.link(pending.dim(), pending.pos());
-                serverPlayer.displayClientMessage(Component.translatable("message.quantum_assembly.gate_linked"), true);
-                return;
-            }
         }
         if (!gate.isLinked()) {
             serverPlayer.displayClientMessage(Component.translatable("message.quantum_assembly.gate_unlinked"), true);

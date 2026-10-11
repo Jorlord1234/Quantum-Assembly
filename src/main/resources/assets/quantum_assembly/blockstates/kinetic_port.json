@@ -1,0 +1,56 @@
+{
+  "variants": {
+    "assembled=false,facing=up": {
+      "model": "quantum_assembly:block/kinetic_port"
+    },
+    "assembled=true,facing=up": {
+      "model": "quantum_assembly:block/kinetic_port_assembled"
+    },
+    "assembled=false,facing=down": {
+      "model": "quantum_assembly:block/kinetic_port",
+      "x": 180
+    },
+    "assembled=true,facing=down": {
+      "model": "quantum_assembly:block/kinetic_port_assembled",
+      "x": 180
+    },
+    "assembled=false,facing=north": {
+      "model": "quantum_assembly:block/kinetic_port",
+      "x": 90
+    },
+    "assembled=true,facing=north": {
+      "model": "quantum_assembly:block/kinetic_port_assembled",
+      "x": 90
+    },
+    "assembled=false,facing=east": {
+      "model": "quantum_assembly:block/kinetic_port",
+      "x": 90,
+      "y": 90
+    },
+    "assembled=true,facing=east": {
+      "model": "quantum_assembly:block/kinetic_port_assembled",
+      "x": 90,
+      "y": 90
+    },
+    "assembled=false,facing=south": {
+      "model": "quantum_assembly:block/kinetic_port",
+      "x": 90,
+      "y": 180
+    },
+    "assembled=true,facing=south": {
+      "model": "quantum_assembly:block/kinetic_port_assembled",
+      "x": 90,
+      "y": 180
+    },
+    "assembled=false,facing=west": {
+      "model": "quantum_assembly:block/kinetic_port",
+      "x": 90,
+      "y": 270
+    },
+    "assembled=true,facing=west": {
+      "model": "quantum_assembly:block/kinetic_port_assembled",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

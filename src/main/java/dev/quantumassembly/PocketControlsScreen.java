@@ -87,7 +87,7 @@ public class PocketControlsScreen extends AbstractContainerScreen<PocketControls
                 new Cat(GUESTS, "gui.quantum_assembly.cat_guests", 0xFF3A5FCD, PocketManager.GUEST_MAX.length - 1, right, top, 40, PocketControlsMenu.BUTTON_GUESTS),
                 new Cat(REST, "gui.quantum_assembly.cat_rest", 0xFFC49A00, PocketManager.REST_COST.length - 1, left, top + 44, 40, PocketControlsMenu.BUTTON_REST),
                 new Cat(VAULT, "gui.quantum_assembly.cat_vault", 0xFF8A4FD0, PocketManager.VAULT_COST.length - 1, right, top + 44, 58, PocketControlsMenu.BUTTON_VAULT_UPGRADE),
-                new Cat(POWER, "gui.quantum_assembly.cat_power", 0xFFB02020, 1, left, top + 88, 40, -1)
+                new Cat(POWER, "gui.quantum_assembly.cat_power", 0xFFB02020, PocketManager.POWER_COST.length - 1, left, top + 88, 40, PocketControlsMenu.BUTTON_POWER_UPGRADE)
         };
         cats[SPACE].icon = new ItemStack(ModItems.STARGLASS.get());
         cats[GUESTS].icon = new ItemStack(Items.PLAYER_HEAD);
@@ -124,6 +124,8 @@ public class PocketControlsScreen extends AbstractContainerScreen<PocketControls
                 return menu.restLevel();
             case VAULT:
                 return menu.vaultLevel();
+            case POWER:
+                return menu.powerLevel();
             default:
                 return 0;
         }
@@ -139,6 +141,8 @@ public class PocketControlsScreen extends AbstractContainerScreen<PocketControls
                 return menu.restNextCost();
             case VAULT:
                 return menu.vaultNextCost();
+            case POWER:
+                return menu.powerNextCost();
             default:
                 return 0;
         }
@@ -150,7 +154,7 @@ public class PocketControlsScreen extends AbstractContainerScreen<PocketControls
         if (level >= k) {
             return STATE_UNLOCKED;
         }
-        if (id != POWER && level + 1 == k && nextCostOf(id) > 0) {
+        if (level + 1 == k && nextCostOf(id) > 0) {
             return STATE_NEXT;
         }
         return STATE_LOCKED;
@@ -222,9 +226,7 @@ public class PocketControlsScreen extends AbstractContainerScreen<PocketControls
     private List<Component> tooltipFor(int c, int k) {
         Cat cat = cats[c];
         List<Component> lines = new ArrayList<>();
-        String title = cat.id == POWER
-                ? Component.translatable("gui.quantum_assembly.kinetic_title").getString()
-                : Component.translatable(cat.nameKey).getString() + " " + ROMAN[Math.min(k, ROMAN.length - 1)];
+        String title = Component.translatable(cat.nameKey).getString() + " " + ROMAN[Math.min(k, ROMAN.length - 1)];
         lines.add(Component.literal(title).withStyle(ChatFormatting.LIGHT_PURPLE));
         switch (cat.id) {
             case SPACE:
@@ -240,7 +242,7 @@ public class PocketControlsScreen extends AbstractContainerScreen<PocketControls
                 lines.add(Component.translatable("gui.quantum_assembly.tip_vault", PocketManager.VAULT_ROWS[k] * 9).withStyle(ChatFormatting.GRAY));
                 break;
             default:
-                lines.add(Component.translatable("gui.quantum_assembly.tip_power").withStyle(ChatFormatting.GRAY));
+                lines.add(Component.translatable("gui.quantum_assembly.tip_power", PocketManager.POWER_CAPACITY[k]).withStyle(ChatFormatting.GRAY));
                 break;
         }
         int state = stateOf(cat.id, k);
@@ -254,8 +256,6 @@ public class PocketControlsScreen extends AbstractContainerScreen<PocketControls
             } else {
                 lines.add(Component.translatable("gui.quantum_assembly.tip_need", cost, have).withStyle(ChatFormatting.RED));
             }
-        } else if (cat.id == POWER) {
-            lines.add(Component.translatable("gui.quantum_assembly.tip_soon").withStyle(ChatFormatting.DARK_GRAY));
         } else {
             lines.add(Component.translatable("gui.quantum_assembly.tip_locked").withStyle(ChatFormatting.DARK_GRAY));
         }

@@ -46,6 +46,8 @@ public class ModTabs {
                         output.accept(ModItems.POCKET_CASING.get());
                         output.accept(ModItems.POCKET_CONTROLS.get());
                         output.accept(ModItems.POCKET_CORE.get());
+                        output.accept(ModItems.KINETIC_PORT.get());
+                        output.accept(ModItems.POCKET_OUTPUT.get());
                         output.accept(ModItems.QUANTUM_GATE.get());
                         output.accept(ModItems.QUANTUM_ASSEMBLY_KIT.get());
                         output.accept(ModItems.MASTER_CHEFS_CAULDRON.get());

@@ -1,0 +1,83 @@
+{
+  "parent": "minecraft:block/block",
+  "texture_size": [
+    32,
+    32
+  ],
+  "textures": {
+    "0": "quantum_assembly:block/quantum_assembly_kit",
+    "particle": "quantum_assembly:block/quantum_assembly_kit"
+  },
+  "elements": [
+    {
+      "from": [
+        1,
+        0,
+        4
+      ],
+      "to": [
+        15,
+        6,
+        12
+      ],
+      "faces": {
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            7.0,
+            3.0
+          ],
+          "texture": "#0"
+        },
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            7.0,
+            3.0
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            8.0,
+            0.0,
+            12.0,
+            3.0
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            8.0,
+            0.0,
+            12.0,
+            3.0
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            0.0,
+            4.5,
+            7.0,
+            8.5
+          ],
+          "texture": "#0",
+          "rotation": 180
+        },
+        "down": {
+          "uv": [
+            0.0,
+            4.5,
+            7.0,
+            8.5
+          ],
+          "texture": "#0",
+          "rotation": 180
+        }
+      }
+    }
+  ]
+}

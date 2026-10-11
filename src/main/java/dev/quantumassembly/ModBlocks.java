@@ -46,6 +46,17 @@ public class ModBlocks {
     public static final DeferredBlock<PocketCoreBlock> POCKET_CORE = BLOCKS.registerBlock("pocket_core", PocketCoreBlock::new, partProps());
     public static final DeferredBlock<PocketControlsBlock> POCKET_CONTROLS = BLOCKS.registerBlock("pocket_controls", PocketControlsBlock::new, partProps());
 
+    /** A casing of the multiblock that takes Create rotation (SU / RPM) in. */
+    public static final DeferredBlock<KineticPortBlock> KINETIC_PORT = BLOCKS.registerBlock("kinetic_port", KineticPortBlock::new, partProps());
+
+    /** Placed inside the pocket space: gives that rotation back out. */
+    public static final DeferredBlock<PocketOutputBlock> POCKET_OUTPUT = BLOCKS.registerBlock("pocket_output", PocketOutputBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_BLACK)
+                    .strength(3.0F, 8.0F)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.NETHERITE_BLOCK));
+
     public static final DeferredBlock<Block> STARGLASS_ORE = BLOCKS.registerSimpleBlock("starglass_ore",
             BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_CYAN)

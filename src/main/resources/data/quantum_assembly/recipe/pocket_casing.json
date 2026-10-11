@@ -2,16 +2,16 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "pattern": [
-    "OPO",
-    "PNP",
-    "OPO"
+    "HSH",
+    "SNS",
+    "HSH"
   ],
   "key": {
-    "O": {
-      "item": "minecraft:obsidian"
+    "H": {
+      "item": "quantum_assembly:heavy_duty_plate"
     },
-    "P": {
-      "item": "minecraft:polished_blackstone"
+    "S": {
+      "item": "quantum_assembly:polished_starglass"
     },
     "N": {
       "item": "minecraft:netherite_ingot"

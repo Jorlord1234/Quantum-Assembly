@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=up": {
+      "model": "quantum_assembly:block/pocket_output"
+    },
+    "facing=down": {
+      "model": "quantum_assembly:block/pocket_output",
+      "x": 180
+    },
+    "facing=north": {
+      "model": "quantum_assembly:block/pocket_output",
+      "x": 90
+    },
+    "facing=east": {
+      "model": "quantum_assembly:block/pocket_output",
+      "x": 90,
+      "y": 90
+    },
+    "facing=south": {
+      "model": "quantum_assembly:block/pocket_output",
+      "x": 90,
+      "y": 180
+    },
+    "facing=west": {
+      "model": "quantum_assembly:block/pocket_output",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

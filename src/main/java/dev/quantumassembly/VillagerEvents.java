@@ -15,7 +15,8 @@ import net.neoforged.neoforge.event.village.VillagerTradesEvent;
 /**
  * The Quantum Engineer's trades. Deliberately stingy: he buys lab leftovers for emeralds and sells a few
  * decor and utility items at high prices. Nothing from the main progression is sold (Nova Template,
- * Experience Catalyst, Kit, Pocket parts, Cake of Nebulae) and Starglass can only be sold to him.
+ * Experience Catalyst, Kit, Pocket parts, Cake of Nebulae), nothing overpowered (no Totem of Undying), and Starglass
+ * can only be sold to him.
  */
 @EventBusSubscriber(modid = QuantumAssembly.MODID)
 public class VillagerEvents {
@@ -42,8 +43,7 @@ public class VillagerEvents {
         add(trades, 4, new BasicItemListing(new ItemStack(Items.EMERALD, 48), new ItemStack(Items.ECHO_SHARD), 1, 15, 0.05F));
         // Master
         add(trades, 5, new BasicItemListing(new ItemStack(Items.EMERALD, 12), new ItemStack(Items.AMETHYST_BLOCK, 16), 4, 30, 0.05F));
-        add(trades, 5, new BasicItemListing(new ItemStack(Items.EMERALD, 64), new ItemStack(ModItems.STARGLASS.get(), 4),
-                new ItemStack(Items.TOTEM_OF_UNDYING), 1, 30, 0.05F));
+        // (No Totem of Undying or anything else that powerful: he only ever sells decor and utility items.)
     }
 
     private static void add(Int2ObjectMap<List<VillagerTrades.ItemListing>> trades, int level, VillagerTrades.ItemListing listing) {
