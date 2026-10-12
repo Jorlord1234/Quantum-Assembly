@@ -5,6 +5,12 @@ GitHub build (or `./gradlew build`) make the jar. In `src/main/templates/META-IN
 `type="optional"` to `type="required"` (the Kinetic Port needs Create). Delete the files in DELETE_THESE.txt.
 Everything below that says "needs the new build" does not exist in a jar made from the old code.
 
+## Upgrade fix
+- The Pocket Controls window shows the pocket of the controls' owner, but the buttons upgrade the pocket of whoever clicks. If those
+  were different players nothing visibly changed. Now only the owner can upgrade, and you get told why (disassemble + assemble again to become the owner).
+- Upgrade messages (not enough Starglass, upgraded, maximum) now also go to the chat, because the action bar is hidden behind the window.
+- Note: in creative mode no Starglass is taken (that is on purpose).
+
 ## Pocket power (Create SU / RPM) - needs the new build
 - New block **Pocket Kinetic Port**: it is a casing of the multiblock (counts as one of the 25) with a shaft face. Create rotation goes in there.
 - New block **Pocket Power Output**: place it inside your pocket space. It turns at the same speed as your Kinetic Port.
@@ -13,6 +19,11 @@ Everything below that says "needs the new build" does not exist in a jar made fr
 - Only the fastest Kinetic Port of the multiblock counts (one is enough). The multiblock must be in a loaded chunk.
 - Recipes: Kinetic Port = Pocket Casing + Shaft + Electron Tube. Pocket Power Output = Pocket Casing + Shaft + Polished Starglass.
 - The two blocks have no spinning animation yet (they work, goggles show the speed). Say so if you want the shaft to spin.
+
+## Ponder (Create's "hold W" guide) - needs the new build
+- Hold W over a Pocket Casing, Core or Controls: scene "Building the Pocket multiblock" (layer by layer, then assembling).
+- Hold W over the Kinetic Port or the Pocket Power Output: scene "Rotation in your pocket space".
+- Structures: assets/quantum_assembly/ponder/*.nbt. Texts: lang keys quantum_assembly.ponder.<scene>.header / text_1...
 
 ## Quantum Assembly Kit - needs the new build
 - The lid swings open like a Create toolbox while somebody has the Kit open (with the toolbox-style open/close sound).

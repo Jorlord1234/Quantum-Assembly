@@ -28,6 +28,8 @@ public class ClientSetup {
     public static void onClientSetup(FMLClientSetupEvent event) {
         // the burner's cage has see-through gaps: draw it with the cutout render type
         event.enqueueWork(() -> ItemBlockRenderTypes.setRenderLayer(ModBlocks.NEBULA_BLAZE_BURNER.get(), RenderType.cutout()));
+        // Create's Ponder: hold W over a pocket part to see how the multiblock works
+        event.enqueueWork(() -> net.createmod.ponder.foundation.PonderIndex.addPlugin(new QuantumPonderPlugin()));
     }
 
     @SubscribeEvent

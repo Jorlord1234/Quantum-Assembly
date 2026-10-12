@@ -150,6 +150,13 @@ public class PocketControlsMenu extends AbstractContainerMenu {
         if (controls == null || !(player instanceof ServerPlayer serverPlayer)) {
             return false;
         }
+        boolean isUpgrade = id == BUTTON_UPGRADE || id == BUTTON_GUESTS || id == BUTTON_REST
+                || id == BUTTON_VAULT_UPGRADE || id == BUTTON_POWER_UPGRADE;
+        if (isUpgrade && controls.getOwner() != null && !controls.getOwner().equals(serverPlayer.getUUID())) {
+            // The window shows the owner's pocket, so only the owner can upgrade it (and pays for it).
+            PocketManager.say(serverPlayer, net.minecraft.network.chat.Component.translatable("message.quantum_assembly.not_owner"));
+            return true;
+        }
         if (id == BUTTON_UPGRADE) {
             PocketManager.upgrade(serverPlayer);
             return true;

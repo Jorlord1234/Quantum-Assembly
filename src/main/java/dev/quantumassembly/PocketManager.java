@@ -141,7 +141,7 @@ public class PocketManager {
         PocketData data = PocketData.get(server);
         PocketData.Plot plot = data.plot(player.getUUID());
         if (plot.level >= RADIUS.length - 1) {
-            player.displayClientMessage(Component.translatable("message.quantum_assembly.max_level"), true);
+            say(player, Component.translatable("message.quantum_assembly.max_level"));
             return;
         }
         int cost = COST[plot.level + 1];
@@ -152,7 +152,7 @@ public class PocketManager {
             }
         }
         if (have < cost) {
-            player.displayClientMessage(Component.translatable("message.quantum_assembly.need_starglass", cost, have), true);
+            say(player, Component.translatable("message.quantum_assembly.need_starglass", cost, have));
             return;
         }
         if (!player.isCreative()) {
@@ -171,7 +171,7 @@ public class PocketManager {
             build(pocket, plot, oldRadius);
         }
         data.setDirty();
-        player.displayClientMessage(Component.translatable("message.quantum_assembly.upgraded", plot.level, RADIUS[plot.level] * 2 + 1), true);
+        say(player, Component.translatable("message.quantum_assembly.upgraded", plot.level, RADIUS[plot.level] * 2 + 1));
     }
 
     /** Spend Starglass to let more guests in at the same time. */
@@ -179,7 +179,7 @@ public class PocketManager {
         PocketData data = PocketData.get(player.getServer());
         PocketData.Plot plot = data.plot(player.getUUID());
         if (plot.guestLevel >= GUEST_MAX.length - 1) {
-            player.displayClientMessage(Component.translatable("message.quantum_assembly.max_guests"), true);
+            say(player, Component.translatable("message.quantum_assembly.max_guests"));
             return;
         }
         int cost = GUEST_COST[plot.guestLevel + 1];
@@ -190,7 +190,7 @@ public class PocketManager {
             }
         }
         if (have < cost) {
-            player.displayClientMessage(Component.translatable("message.quantum_assembly.need_starglass", cost, have), true);
+            say(player, Component.translatable("message.quantum_assembly.need_starglass", cost, have));
             return;
         }
         if (!player.isCreative()) {
@@ -205,10 +205,19 @@ public class PocketManager {
         }
         plot.guestLevel++;
         data.setDirty();
-        player.displayClientMessage(Component.translatable("message.quantum_assembly.guests_upgraded", plot.guestLevel, GUEST_MAX[plot.guestLevel]), true);
+        say(player, Component.translatable("message.quantum_assembly.guests_upgraded", plot.guestLevel, GUEST_MAX[plot.guestLevel]));
     }
 
     /** Takes the Starglass for an upgrade (not in creative). Returns false and tells the player if there is not enough. */
+    /**
+     * Tells the player something about an upgrade. The action bar alone is hidden behind the big Pocket Controls
+     * window, so the same text also goes to the chat.
+     */
+    public static void say(ServerPlayer player, Component message) {
+        player.displayClientMessage(message, true);
+        player.sendSystemMessage(message);
+    }
+
     private static boolean pay(ServerPlayer player, int cost) {
         int have = 0;
         for (ItemStack stack : player.getInventory().items) {
@@ -217,7 +226,7 @@ public class PocketManager {
             }
         }
         if (have < cost) {
-            player.displayClientMessage(Component.translatable("message.quantum_assembly.need_starglass", cost, have), true);
+            say(player, Component.translatable("message.quantum_assembly.need_starglass", cost, have));
             return false;
         }
         if (!player.isCreative()) {
@@ -238,7 +247,7 @@ public class PocketManager {
         PocketData data = PocketData.get(player.getServer());
         PocketData.Plot plot = data.plot(player.getUUID());
         if (plot.restLevel >= REST_COST.length - 1) {
-            player.displayClientMessage(Component.translatable("message.quantum_assembly.max_rest"), true);
+            say(player, Component.translatable("message.quantum_assembly.max_rest"));
             return;
         }
         if (!pay(player, REST_COST[plot.restLevel + 1])) {
@@ -246,7 +255,7 @@ public class PocketManager {
         }
         plot.restLevel++;
         data.setDirty();
-        player.displayClientMessage(Component.translatable("message.quantum_assembly.rest_upgraded", plot.restLevel), true);
+        say(player, Component.translatable("message.quantum_assembly.rest_upgraded", plot.restLevel));
     }
 
     /** Called every few seconds for a player inside the pocket dimension: the Rest effect of the space they stand in. */
@@ -276,7 +285,7 @@ public class PocketManager {
         PocketData data = PocketData.get(player.getServer());
         PocketData.Plot plot = data.plot(player.getUUID());
         if (plot.powerLevel >= POWER_COST.length - 1) {
-            player.displayClientMessage(Component.translatable("message.quantum_assembly.max_power"), true);
+            say(player, Component.translatable("message.quantum_assembly.max_power"));
             return;
         }
         if (!pay(player, POWER_COST[plot.powerLevel + 1])) {
@@ -284,7 +293,7 @@ public class PocketManager {
         }
         plot.powerLevel++;
         data.setDirty();
-        player.displayClientMessage(Component.translatable("message.quantum_assembly.power_upgraded", POWER_CAPACITY[plot.powerLevel]), true);
+        say(player, Component.translatable("message.quantum_assembly.power_upgraded", POWER_CAPACITY[plot.powerLevel]));
     }
 
     /** Remembers where this owner's Pocket Controls are, so the Pocket Power Output knows where to look for the Kinetic Port. */
@@ -307,7 +316,7 @@ public class PocketManager {
         PocketData data = PocketData.get(player.getServer());
         PocketData.Plot plot = data.plot(player.getUUID());
         if (plot.vaultLevel >= VAULT_COST.length - 1) {
-            player.displayClientMessage(Component.translatable("message.quantum_assembly.max_vault"), true);
+            say(player, Component.translatable("message.quantum_assembly.max_vault"));
             return;
         }
         if (!pay(player, VAULT_COST[plot.vaultLevel + 1])) {
@@ -315,7 +324,7 @@ public class PocketManager {
         }
         plot.vaultLevel++;
         data.setDirty();
-        player.displayClientMessage(Component.translatable("message.quantum_assembly.vault_upgraded", VAULT_ROWS[plot.vaultLevel] * 9), true);
+        say(player, Component.translatable("message.quantum_assembly.vault_upgraded", VAULT_ROWS[plot.vaultLevel] * 9));
     }
 
     /** Opens the Pocket Vault as a normal chest screen. */

@@ -132,5 +132,19 @@
   "block.quantum_assembly.pocket_output": "Pocket Power Output",
   "gui.quantum_assembly.kit_upgrades": "Upgrades",
   "message.quantum_assembly.max_power": "The Power upgrade is already at its maximum",
-  "message.quantum_assembly.power_upgraded": "Power upgraded: the Pocket Power Output now offers %s SU per RPM"
+  "message.quantum_assembly.power_upgraded": "Power upgraded: the Pocket Power Output now offers %s SU per RPM",
+  "quantum_assembly.ponder.pocket_multiblock.header": "Building the Pocket multiblock",
+  "quantum_assembly.ponder.pocket_multiblock.text_1": "The pocket multiblock is a cube of 3 x 3 x 3 blocks. Start with the bottom layer of 9 Pocket Casings.",
+  "quantum_assembly.ponder.pocket_multiblock.text_2": "Place the Pocket Core in the middle of the cube.",
+  "quantum_assembly.ponder.pocket_multiblock.text_3": "Surround the Core with Pocket Casings on the middle layer.",
+  "quantum_assembly.ponder.pocket_multiblock.text_4": "Leave one spot in the middle of a side for the Pocket Controls. Its front faces outward.",
+  "quantum_assembly.ponder.pocket_multiblock.text_5": "Finish with the top layer of Pocket Casings. In total: 25 Casings, the Core and the Controls.",
+  "quantum_assembly.ponder.pocket_multiblock.text_6": "Right-click the Pocket Controls to assemble the multiblock. Once it lights up, the parts are locked in place.",
+  "quantum_assembly.ponder.pocket_multiblock.text_7": "A Pocket Kinetic Port counts as one of the casings, so you can swap one casing for it.",
+  "quantum_assembly.ponder.pocket_power.header": "Rotation in your pocket space",
+  "quantum_assembly.ponder.pocket_power.text_1": "The Pocket Kinetic Port is a casing of the multiblock with a shaft side. Connect your Create machines to that side.",
+  "quantum_assembly.ponder.pocket_power.text_2": "The rotation is sent into your pocket space. You need the Power upgrade in the Pocket Controls for this.",
+  "quantum_assembly.ponder.pocket_power.text_3": "Inside your pocket space, place a Pocket Power Output. It turns at the speed of the port and offers the stress capacity of your Power upgrade.",
+  "quantum_assembly.ponder.pocket_power.text_4": "The port puts the same load on your network, so the power is never free. One port is enough.",
+  "message.quantum_assembly.not_owner": "These Pocket Controls belong to another player. Press Disassemble and build the multiblock again to make them yours."
 }

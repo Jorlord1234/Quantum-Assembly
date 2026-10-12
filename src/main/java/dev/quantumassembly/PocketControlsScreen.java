@@ -205,9 +205,8 @@ public class PocketControlsScreen extends AbstractContainerScreen<PocketControls
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if (super.mouseClicked(mouseX, mouseY, button)) {
-            return true;
-        }
+        // Check the upgrade nodes FIRST: a container screen's own mouseClicked always reports the click as handled
+        // (it treats every click as a slot click), so anything after it would never run.
         if (button == 0) {
             int[] hit = nodeAt(mouseX, mouseY);
             if (hit != null && stateOf(hit[0], hit[1]) == STATE_NEXT && cats[hit[0]].buttonId >= 0) {
@@ -218,7 +217,7 @@ public class PocketControlsScreen extends AbstractContainerScreen<PocketControls
                 return true;
             }
         }
-        return false;
+        return super.mouseClicked(mouseX, mouseY, button);
     }
 
     // ---------- tooltip ----------
